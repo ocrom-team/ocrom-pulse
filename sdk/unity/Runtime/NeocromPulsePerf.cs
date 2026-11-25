@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Profiling;
 
-namespace Neocrom.CromPulse
+namespace Neocrom.Pulse
 {
-    internal sealed class CromPulsePerf
+    internal sealed class NeocromPulsePerf
     {
         private const int RingCapacity = 120;
         private readonly float[] _frameMsRing = new float[RingCapacity];

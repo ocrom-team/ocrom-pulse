@@ -1,4 +1,4 @@
-class_name CromPulsePrivacy
+class_name NeocromPulsePrivacy
 extends RefCounted
 
 const CONSENT_SECTION := "consent"

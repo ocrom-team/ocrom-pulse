@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-const ClientScript = preload("res://addons/crom_pulse/crom_pulse_client.gd")
+const ClientScript = preload("res://addons/neocrom_pulse/neocrom_pulse_client.gd")
 
 signal consent_saved(consent: Dictionary)
 

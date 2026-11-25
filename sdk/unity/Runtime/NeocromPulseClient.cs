@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Neocrom.CromPulse
+namespace Neocrom.Pulse
 {
     /// <summary>
     /// Static developer-facing facade for Neocrom Pulse in Unity.
     /// Auto-initializes via RuntimeInitializeOnLoadMethod; zero scene setup required.
     /// </summary>
-    public static class CromPulse
+    public static class NeocromPulse
     {
-        public static event Action<CromPulseConsent> ConsentChanged;
+        public static event Action<NeocromPulseConsent> ConsentChanged;
         public static event Action<int, bool> BatchFlushed;
         public static event Action<string> ErrorReported;
 
-        public static bool HasDecidedConsent() => CromPulseClient.Instance.HasDecidedConsent();
-        public static bool IsTelemetryEnabled() => CromPulseClient.Instance.IsTelemetryEnabled();
-        public static CromPulseConsent GetConsent() => CromPulseClient.Instance.GetConsent();
+        public static bool HasDecidedConsent() => NeocromPulseClient.Instance.HasDecidedConsent();
+        public static bool IsTelemetryEnabled() => NeocromPulseClient.Instance.IsTelemetryEnabled();
+        public static NeocromPulseConsent GetConsent() => NeocromPulseClient.Instance.GetConsent();
 
         public static void SetConsent(bool gameplay, bool performance, bool errors, bool hardware, bool publicBenchmark = false) =>
-            CromPulseClient.Instance.SetConsent(gameplay, performance, errors, hardware, publicBenchmark);
+            NeocromPulseClient.Instance.SetConsent(gameplay, performance, errors, hardware, publicBenchmark);
 
         public static void GrantAllConsent(bool includePublicBenchmark = true) =>
             SetConsent(true, true, true, true, includePublicBenchmark);
@@ -28,20 +28,20 @@ namespace Neocrom.CromPulse
         public static void DeclineAllConsent() =>
             SetConsent(false, false, false, false, false);
 
-        public static void ClearLocalData() => CromPulseClient.Instance.ResetConsent();
-        public static void ShowConsentDialog() => CromPulseClient.Instance.ShowConsentDialog();
+        public static void ClearLocalData() => NeocromPulseClient.Instance.ResetConsent();
+        public static void ShowConsentDialog() => NeocromPulseClient.Instance.ShowConsentDialog();
 
         public static void TrackEvent(string eventName, IDictionary<string, object> props = null) =>
-            CromPulseClient.Instance.TrackEvent(eventName, props);
+            NeocromPulseClient.Instance.TrackEvent(eventName, props);
 
         public static void TrackProgression(string level, string status, int score = -1) =>
-            CromPulseClient.Instance.TrackProgression(level, status, score);
+            NeocromPulseClient.Instance.TrackProgression(level, status, score);
 
         public static void TrackSetting(string settingName, object value) =>
-            CromPulseClient.Instance.TrackSetting(settingName, value);
+            NeocromPulseClient.Instance.TrackSetting(settingName, value);
 
-        public static void BeginLoad(string zoneName) => CromPulseClient.Instance.BeginLoad(zoneName);
-        public static int EndLoad(string zoneName) => CromPulseClient.Instance.EndLoad(zoneName);
+        public static void BeginLoad(string zoneName) => NeocromPulseClient.Instance.BeginLoad(zoneName);
+        public static int EndLoad(string zoneName) => NeocromPulseClient.Instance.EndLoad(zoneName);
 
         public static T Measure<T>(string label, Func<T> action)
         {
@@ -58,30 +58,30 @@ namespace Neocrom.CromPulse
         }
 
         public static AsyncOperation LoadSceneAsync(string sceneName, LoadSceneMode mode = LoadSceneMode.Single) =>
-            CromPulseClient.Instance.LoadSceneTrackedAsync(sceneName, mode);
+            NeocromPulseClient.Instance.LoadSceneTrackedAsync(sceneName, mode);
 
-        public static Dictionary<string, object> SamplePerformance() => CromPulseClient.Instance.SamplePerformance();
+        public static Dictionary<string, object> SamplePerformance() => NeocromPulseClient.Instance.SamplePerformance();
 
         public static string ReportError(string message, string severity = "error", string source = "") =>
-            CromPulseClient.Instance.ReportError(message, severity, source);
+            NeocromPulseClient.Instance.ReportError(message, severity, source);
 
-        public static bool Flush() => CromPulseClient.Instance.Flush();
-        public static string GetPrivacyPreviewJson() => CromPulseClient.Instance.GetPrivacyPreviewJson();
-        public static Dictionary<string, object> GetDiagnostics() => CromPulseClient.Instance.GetDiagnostics();
+        public static bool Flush() => NeocromPulseClient.Instance.Flush();
+        public static string GetPrivacyPreviewJson() => NeocromPulseClient.Instance.GetPrivacyPreviewJson();
+        public static Dictionary<string, object> GetDiagnostics() => NeocromPulseClient.Instance.GetDiagnostics();
 
-        internal static void RaiseConsentChanged(CromPulseConsent c) => ConsentChanged?.Invoke(c);
+        internal static void RaiseConsentChanged(NeocromPulseConsent c) => ConsentChanged?.Invoke(c);
         internal static void RaiseBatchFlushed(int count, bool ok) => BatchFlushed?.Invoke(count, ok);
         internal static void RaiseErrorReported(string fp) => ErrorReported?.Invoke(fp);
     }
 
-    public sealed class CromPulseClient : MonoBehaviour
+    public sealed class NeocromPulseClient : MonoBehaviour
     {
-        public const string SdkName = "crom-pulse-unity";
+        public const string SdkName = "neocrom-pulse-unity";
         public const string SdkVersion = "0.1.0";
         private const float ErrorCooldownSec = 10f;
 
-        private static CromPulseClient _instance;
-        public static CromPulseClient Instance
+        private static NeocromPulseClient _instance;
+        public static NeocromPulseClient Instance
         {
             get
             {
@@ -90,11 +90,11 @@ namespace Neocrom.CromPulse
             }
         }
 
-        [SerializeField] private CromPulseConfig config;
+        [SerializeField] private NeocromPulseConfig config;
 
-        private CromPulseConsent _consent;
-        private readonly CromPulsePerf _perf = new CromPulsePerf();
-        private readonly CromPulseTransport _transport = new CromPulseTransport();
+        private NeocromPulseConsent _consent;
+        private readonly NeocromPulsePerf _perf = new NeocromPulsePerf();
+        private readonly NeocromPulseTransport _transport = new NeocromPulseTransport();
         private Dictionary<string, object> _hardwareProfile = new Dictionary<string, object>();
 
         private string _sessionId = string.Empty;
@@ -115,9 +115,9 @@ namespace Neocrom.CromPulse
         private static void Bootstrap()
         {
             if (_instance != null) return;
-            var go = new GameObject("[CromPulse]");
+            var go = new GameObject("[NeocromPulse]");
             DontDestroyOnLoad(go);
-            _instance = go.AddComponent<CromPulseClient>();
+            _instance = go.AddComponent<NeocromPulseClient>();
         }
 
         private void Awake()
@@ -128,17 +128,17 @@ namespace Neocrom.CromPulse
 
             if (config == null)
             {
-                config = Resources.Load<CromPulseConfig>("CromPulseConfig");
-                if (config == null) config = ScriptableObject.CreateInstance<CromPulseConfig>();
+                config = Resources.Load<NeocromPulseConfig>("NeocromPulseConfig");
+                if (config == null) config = ScriptableObject.CreateInstance<NeocromPulseConfig>();
             }
 
             _transport.Setup(config);
             CheckEndpointSecurity();
 
-            _consent = CromPulsePrivacy.LoadConsent();
+            _consent = NeocromPulsePrivacy.LoadConsent();
             if (!config.requireConsent && !_consent.decided)
             {
-                _consent = new CromPulseConsent
+                _consent = new NeocromPulseConsent
                 {
                     decided = true,
                     gameplay = true,
@@ -249,12 +249,12 @@ namespace Neocrom.CromPulse
 
         public bool HasDecidedConsent() => _consent.decided;
         public bool IsTelemetryEnabled() => _consent.AnyTelemetryGranted;
-        public CromPulseConsent GetConsent() => _consent;
+        public NeocromPulseConsent GetConsent() => _consent;
 
         public void SetConsent(bool gameplay, bool performance, bool errors, bool hardware, bool publicBenchmark)
         {
             bool wasAllowed = _consent.AnyTelemetryGranted;
-            _consent = new CromPulseConsent
+            _consent = new NeocromPulseConsent
             {
                 decided = true,
                 gameplay = gameplay,
@@ -264,8 +264,8 @@ namespace Neocrom.CromPulse
                 publicBenchmark = publicBenchmark && (gameplay || performance),
                 updatedAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
             };
-            CromPulsePrivacy.SaveConsent(_consent);
-            CromPulse.RaiseConsentChanged(_consent);
+            NeocromPulsePrivacy.SaveConsent(_consent);
+            NeocromPulse.RaiseConsentChanged(_consent);
 
             if (_consent.AnyTelemetryGranted)
             {
@@ -284,19 +284,19 @@ namespace Neocrom.CromPulse
 
         public void ResetConsent()
         {
-            CromPulsePrivacy.ClearConsent();
+            NeocromPulsePrivacy.ClearConsent();
             _consent = default;
             _eventQueue.Clear();
             _hardwareProfile.Clear();
             _transport.ClearOfflineQueue();
             _sessionActive = false;
             _sessionId = string.Empty;
-            CromPulse.RaiseConsentChanged(_consent);
+            NeocromPulse.RaiseConsentChanged(_consent);
         }
 
         public void ShowConsentDialog()
         {
-            CromPulseConsentUI.Show(this);
+            NeocromPulseConsentUI.Show(this);
         }
 
         public void StartSession()
@@ -359,7 +359,7 @@ namespace Neocrom.CromPulse
                 { "ts", DateTimeOffset.UtcNow.ToUnixTimeSeconds() },
                 { "name", cleanName },
             };
-            var cleanProps = CromPulsePrivacy.ScrubProperties(props);
+            var cleanProps = NeocromPulsePrivacy.ScrubProperties(props);
             if (cleanProps.Count > 0) ev["props"] = cleanProps;
             PushEvent(ev);
         }
@@ -425,10 +425,10 @@ namespace Neocrom.CromPulse
             if (!_consent.errors) return string.Empty;
             string cleanSev = (severity ?? "error").ToLowerInvariant();
             if (cleanSev != "warning" && cleanSev != "error" && cleanSev != "fatal") cleanSev = "error";
-            string cleanMsg = CromPulsePrivacy.ScrubText(message, 512);
+            string cleanMsg = NeocromPulsePrivacy.ScrubText(message, 512);
             if (string.IsNullOrEmpty(cleanMsg)) return string.Empty;
-            string cleanSrc = CromPulsePrivacy.ScrubText(source, 160);
-            string fp = CromPulsePrivacy.Sha256HexPrefix($"{cleanSev}|{cleanSrc}|{(cleanMsg.Length > 120 ? cleanMsg.Substring(0, 120) : cleanMsg)}", 20);
+            string cleanSrc = NeocromPulsePrivacy.ScrubText(source, 160);
+            string fp = NeocromPulsePrivacy.Sha256HexPrefix($"{cleanSev}|{cleanSrc}|{(cleanMsg.Length > 120 ? cleanMsg.Substring(0, 120) : cleanMsg)}", 20);
 
             float now = Time.realtimeSinceStartup;
             if (_errorCooldowns.TryGetValue(fp, out float lastSent) && now - lastSent < ErrorCooldownSec) return fp;
@@ -448,7 +448,7 @@ namespace Neocrom.CromPulse
                     }
                 },
             });
-            CromPulse.RaiseErrorReported(fp);
+            NeocromPulse.RaiseErrorReported(fp);
             return fp;
         }
 
@@ -463,7 +463,7 @@ namespace Neocrom.CromPulse
             StartCoroutine(_transport.SendEnvelopeCoroutine(envelope, (ok, _code) =>
             {
                 if (!ok) _transport.PersistOfflineEvents(batch);
-                CromPulse.RaiseBatchFlushed(batch.Count, ok);
+                NeocromPulse.RaiseBatchFlushed(batch.Count, ok);
             }));
             return true;
         }
@@ -540,12 +540,12 @@ namespace Neocrom.CromPulse
         {
             _eventQueue.Add(ev);
             while (_eventQueue.Count > config.maxQueueEvents) _eventQueue.RemoveAt(0);
-            if (config.debugLogging) Debug.Log($"[CromPulse] queued: {ev["type"]}");
+            if (config.debugLogging) Debug.Log($"[NeocromPulse] queued: {ev["type"]}");
         }
 
         private void RefreshHardwareProfile()
         {
-            _hardwareProfile = _consent.hardware ? CromPulsePrivacy.CollectAnonymizedHardware() : new Dictionary<string, object>();
+            _hardwareProfile = _consent.hardware ? NeocromPulsePrivacy.CollectAnonymizedHardware() : new Dictionary<string, object>();
         }
 
         private void CheckEndpointSecurity()
@@ -554,7 +554,7 @@ namespace Neocrom.CromPulse
             var url = (config.endpointUrl ?? string.Empty).ToLowerInvariant();
             if (url.StartsWith("http://") && !url.Contains("127.0.0.1") && !url.Contains("localhost"))
             {
-                Debug.LogWarning("[CromPulse] Using unencrypted http:// endpoint. Switch to https:// before shipping.");
+                Debug.LogWarning("[NeocromPulse] Using unencrypted http:// endpoint. Switch to https:// before shipping.");
             }
         }
 

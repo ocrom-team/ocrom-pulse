@@ -1,8 +1,8 @@
 extends SceneTree
 
-const ClientScript = preload("res://addons/crom_pulse/crom_pulse_client.gd")
-const PrivacyScript = preload("res://addons/crom_pulse/crom_pulse_privacy.gd")
-const TransportScript = preload("res://addons/crom_pulse/crom_pulse_transport.gd")
+const ClientScript = preload("res://addons/neocrom_pulse/neocrom_pulse_client.gd")
+const PrivacyScript = preload("res://addons/neocrom_pulse/neocrom_pulse_privacy.gd")
+const TransportScript = preload("res://addons/neocrom_pulse/neocrom_pulse_transport.gd")
 
 var _failures: int = 0
 var _assertions: int = 0
@@ -21,12 +21,12 @@ func _initialize() -> void:
 	print("=== Neocrom Pulse Godot 4 SDK Unit Tests ===")
 
 	var client := ClientScript.new()
-	client.name = "TestCromPulse"
+	client.name = "TestNeocromPulse"
 	root.add_child(client)
 	await process_frame
 
-	var test_consent_path := "user://test_crom_pulse_consent.cfg"
-	var test_queue_path := "user://test_crom_pulse_queue.jsonl"
+	var test_consent_path := "user://test_neocrom_pulse_consent.cfg"
+	var test_queue_path := "user://test_neocrom_pulse_queue.jsonl"
 	client.configure({
 		"project_id": "test-project",
 		"ingest_key": "test-secret-key",
@@ -73,7 +73,7 @@ func _initialize() -> void:
 	var measured: int = client.measure("world_gen", func() -> int: return 42)
 	_assert(measured == 42, "measure() returns callable result and records load_time")
 	_assert(client.is_telemetry_enabled(), "is_telemetry_enabled() reflects active consent")
-	_assert(client.get_diagnostics().get("sdk", "") == "crom-pulse-godot", "get_diagnostics() exposes SDK metadata")
+	_assert(client.get_diagnostics().get("sdk", "") == "neocrom-pulse-godot", "get_diagnostics() exposes SDK metadata")
 	client.begin_load("zone_foundry")
 	var load_ms := client.end_load("zone_foundry")
 	_assert(load_ms >= 0, "Load timer returns non-negative duration")
@@ -111,10 +111,10 @@ func _initialize() -> void:
 		var ts_val := ""
 		var sig_val := ""
 		for h in hdrs:
-			if h.begins_with("X-Crom-Timestamp: "):
-				ts_val = h.trim_prefix("X-Crom-Timestamp: ")
-			elif h.begins_with("X-Crom-Signature: sha256="):
-				sig_val = h.trim_prefix("X-Crom-Signature: sha256=")
+			if h.begins_with("X-Neocrom-Timestamp: "):
+				ts_val = h.trim_prefix("X-Neocrom-Timestamp: ")
+			elif h.begins_with("X-Neocrom-Signature: sha256="):
+				sig_val = h.trim_prefix("X-Neocrom-Signature: sha256=")
 				has_sig = true
 		_assert(has_sig and sig_val.length() == 64, "HMAC-SHA256 signature header generated")
 		var expected_sig := TransportScript.compute_hmac_signature("test-secret-key", ts_val, bytes)

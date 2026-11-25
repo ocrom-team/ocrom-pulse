@@ -9,19 +9,19 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Neocrom.CromPulse
+namespace Neocrom.Pulse
 {
-    internal sealed class CromPulseTransport
+    internal sealed class NeocromPulseTransport
     {
-        private CromPulseConfig _config;
+        private NeocromPulseConfig _config;
         private bool _inFlight;
         private float _backoffSec;
         private double _nextRetryAt;
-        private string OfflinePath => Path.Combine(Application.persistentDataPath, "crom_pulse_queue.jsonl");
+        private string OfflinePath => Path.Combine(Application.persistentDataPath, "neocrom_pulse_queue.jsonl");
 
         public bool IsBusy => _inFlight;
 
-        public void Setup(CromPulseConfig config)
+        public void Setup(NeocromPulseConfig config)
         {
             _config = config;
         }
@@ -67,9 +67,9 @@ namespace Neocrom.CromPulse
             req.downloadHandler = new DownloadHandlerBuffer();
             req.timeout = 8;
             req.SetRequestHeader("Content-Type", "application/json; charset=utf-8");
-            req.SetRequestHeader("X-Crom-Key", _config.ingestKey);
-            req.SetRequestHeader("X-Crom-Timestamp", tsStr);
-            req.SetRequestHeader("X-Crom-Signature", "sha256=" + sig);
+            req.SetRequestHeader("X-Neocrom-Key", _config.ingestKey);
+            req.SetRequestHeader("X-Neocrom-Timestamp", tsStr);
+            req.SetRequestHeader("X-Neocrom-Signature", "sha256=" + sig);
             if (useGzip) req.SetRequestHeader("Content-Encoding", "gzip");
 
             yield return req.SendWebRequest();

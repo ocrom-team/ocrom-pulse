@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace Neocrom.CromPulse
+namespace Neocrom.Pulse
 {
-    [CreateAssetMenu(fileName = "CromPulseConfig", menuName = "Neocrom/Neocrom Pulse Config", order = 10)]
-    public sealed class CromPulseConfig : ScriptableObject
+    [CreateAssetMenu(fileName = "NeocromPulseConfig", menuName = "Neocrom/Neocrom Pulse Config", order = 10)]
+    public sealed class NeocromPulseConfig : ScriptableObject
     {
         [Header("Neocrom Project")]
         [Tooltip("Project slug registered in your Neocrom Pulse dashboard (e.g. neocrom-demo).")]

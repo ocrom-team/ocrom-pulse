@@ -10,34 +10,34 @@ Lightweight, modular, privacy-first game analytics and telemetry SDK for **Unity
    ```text
    https://github.com/neocrom-team/crom-pulse.git?path=/sdk/unity
    ```
-4. Open **Tools → Neocrom → Neocrom Pulse Setup** and click **Create CromPulseConfig in Assets/Resources/**.
+4. Open **Tools → Neocrom → Neocrom Pulse Setup** and click **Create NeocromPulseConfig in Assets/Resources/**.
 5. Set your `projectId`, `ingestKey`, and `endpointUrl` in the Inspector.
 
-**Zero scene setup required:** `CromPulse` auto-bootstraps via `[RuntimeInitializeOnLoadMethod]` and survives scene loads automatically.
+**Zero scene setup required:** `NeocromPulse` auto-bootstraps via `[RuntimeInitializeOnLoadMethod]` and survives scene loads automatically.
 
 ## Features Tailored to Unity
 
 - **Automatic Error & Exception Capture**: Hooks `Application.logMessageReceived` (with PII scrubbing & deduplication cooldown).
-- **Automatic Scene Load Timing**: Hooks `SceneManager.sceneLoaded` or use `CromPulse.LoadSceneAsync("Level02")`.
+- **Automatic Scene Load Timing**: Hooks `SceneManager.sceneLoaded` or use `NeocromPulse.LoadSceneAsync("Level02")`.
 - **Zero-Allocation Performance Ring Buffer**: Tracks `Time.unscaledDeltaTime` (FPS avg/min/p50/p95), `Profiler.GetTotalAllocatedMemoryLong()`, GC heap, and VRAM.
-- **Built-in Neocrom Consent UI**: Zero-asset uGUI overlay (`CromPulse.ShowConsentDialog()`).
-- **GZIP + HMAC-SHA256 + Offline Queue**: Persists failed batches in `Application.persistentDataPath/crom_pulse_queue.jsonl`.
+- **Built-in Neocrom Consent UI**: Zero-asset uGUI overlay (`NeocromPulse.ShowConsentDialog()`).
+- **GZIP + HMAC-SHA256 + Offline Queue**: Persists failed batches in `Application.persistentDataPath/neocrom_pulse_queue.jsonl`.
 
 ## Usage Example
 
 ```csharp
-using Neocrom.CromPulse;
+using Neocrom.Pulse;
 using UnityEngine;
 
 public class GameBootstrap : MonoBehaviour
 {
     void Start()
     {
-        if (!CromPulse.HasDecidedConsent())
-            CromPulse.ShowConsentDialog();
+        if (!NeocromPulse.HasDecidedConsent())
+            NeocromPulse.ShowConsentDialog();
 
-        CromPulse.TrackProgression("tutorial", "started");
-        CromPulse.Measure("procedural_map", () => BuildLevel());
+        NeocromPulse.TrackProgression("tutorial", "started");
+        NeocromPulse.Measure("procedural_map", () => BuildLevel());
     }
 }
 ```

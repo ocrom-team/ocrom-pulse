@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://neocrom.pro/schemas/crom-pulse-v1.json",
+  "$id": "https://neocrom.pro/schemas/neocrom-pulse-v1.json",
   "title": "Neocrom Pulse Telemetry Batch v1",
   "description": "Engine-agnostic, privacy-first telemetry batch envelope for Godot, Unity, Unreal Engine, and custom engines.",
   "type": "object",

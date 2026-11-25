@@ -3,7 +3,7 @@
 
 # Godot Asset Library export-ignore:
 # Ensures GitHub/GitLab release archives submitted to the Godot Asset Library
-# contain only addons/crom_pulse/ and LICENSE/README.md without backend/test files.
+# contain only addons/neocrom_pulse/ and LICENSE/README.md without backend/test files.
 /server export-ignore
 /dashboard export-ignore
 /sdk export-ignore

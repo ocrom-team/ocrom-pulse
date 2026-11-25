@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
-import { createCromPulseServer } from '../../server/app.mjs';
+import { createNeocromPulseServer } from '../../server/app.mjs';
 
 async function startTestServer(opts = {}) {
-  const { server, db } = createCromPulseServer({
+  const { server, db } = createNeocromPulseServer({
     dbPath: ':memory:',
     seedDemo: false,
     kThreshold: opts.kThreshold ?? 5,
@@ -78,9 +78,9 @@ test('ingest gzipped HMAC-signed batch, scrub PII, and aggregate overview', asyn
       headers: {
         'Content-Type': 'application/json',
         'Content-Encoding': 'gzip',
-        'X-Crom-Key': project.ingest_key,
-        'X-Crom-Timestamp': ts,
-        'X-Crom-Signature': 'sha256=' + '0'.repeat(64),
+        'X-Neocrom-Key': project.ingest_key,
+        'X-Neocrom-Timestamp': ts,
+        'X-Neocrom-Signature': 'sha256=' + '0'.repeat(64),
       },
       body: gz,
     });
@@ -92,9 +92,9 @@ test('ingest gzipped HMAC-signed batch, scrub PII, and aggregate overview', asyn
       headers: {
         'Content-Type': 'application/json',
         'Content-Encoding': 'gzip',
-        'X-Crom-Key': project.ingest_key,
-        'X-Crom-Timestamp': ts,
-        'X-Crom-Signature': signPayload(project.ingest_key, ts, gz),
+        'X-Neocrom-Key': project.ingest_key,
+        'X-Neocrom-Timestamp': ts,
+        'X-Neocrom-Signature': signPayload(project.ingest_key, ts, gz),
       },
       body: gz,
     });
@@ -127,9 +127,9 @@ test('ingest gzipped HMAC-signed batch, scrub PII, and aggregate overview', asyn
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Crom-Key': project.ingest_key,
-        'X-Crom-Timestamp': ts,
-        'X-Crom-Signature': signPayload(project.ingest_key, ts, buf2),
+        'X-Neocrom-Key': project.ingest_key,
+        'X-Neocrom-Timestamp': ts,
+        'X-Neocrom-Signature': signPayload(project.ingest_key, ts, buf2),
       },
       body: buf2,
     });
@@ -158,7 +158,7 @@ test('server enforces consent flags by dropping non-consented event categories',
     const nowSec = Math.floor(Date.now() / 1000);
     const res = await fetch(`${baseUrl}/api/v1/ingest`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Crom-Key': project.ingest_key },
+      headers: { 'Content-Type': 'application/json', 'X-Neocrom-Key': project.ingest_key },
       body: JSON.stringify({
         schema_version: 1,
         project_id: project.id,

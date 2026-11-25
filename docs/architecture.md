@@ -23,11 +23,11 @@ Neocrom Pulse is a lightweight, modular, privacy-first telemetry platform built 
 4. **Engine-Agnostic Wire Protocol (`v1`)**
    - Every engine SDK emits the identical JSON envelope defined in `spec/telemetry-v1.schema.json`.
    - Engine adapters:
-     - **Godot 4.x** (`addons/crom_pulse/`) — Reference implementation (Autoload + Inspector Plugin + Consent UI + Scene/Perf Collectors).
-     - **Unity (C#)** (`sdk/unity/CromPulseClient.cs`) — `MonoBehaviour` / `UnityWebRequest` + `GZipStream` adapter.
-     - **Unreal Engine (C++)** (`sdk/unreal/CromPulseSubsystem.h`) — `UGameInstanceSubsystem` + `FHttpModule` adapter.
-     - **Web / Custom JS** (`sdk/web/crom-pulse.mjs`) — `fetch` + `CompressionStream('gzip')` + `navigator.sendBeacon` adapter.
+     - **Godot 4.x** (`addons/neocrom_pulse/`) — Reference implementation (Autoload + Inspector Plugin + Consent UI + Scene/Perf Collectors).
+     - **Unity (C#)** (`sdk/unity/NeocromPulseClient.cs`) — `MonoBehaviour` / `UnityWebRequest` + `GZipStream` adapter.
+     - **Unreal Engine (C++)** (`sdk/unreal/NeocromPulseSubsystem.h`) — `UGameInstanceSubsystem` + `FHttpModule` adapter.
+     - **Web / Custom JS** (`sdk/web/neocrom-pulse.mjs`) — `fetch` + `CompressionStream('gzip')` + `navigator.sendBeacon` adapter.
 
 5. **Public Neocrom Game Database (k-Anonymized Benchmarks)**
    - Only games whose developer enabled public sharing **and** players opted into `public_benchmark` contribute to the public benchmark index.
-   - Hardware/FPS/Load-time rows are suppressed unless `sample_count >= k_anonymity_threshold` (default `k = 5`, configurable via `CROM_PULSE_K_ANONYMITY`), protecting small cohorts from re-identification.
+   - Hardware/FPS/Load-time rows are suppressed unless `sample_count >= k_anonymity_threshold` (default `k = 5`, configurable via `NEOCROM_PULSE_K_ANONYMITY`), protecting small cohorts from re-identification.

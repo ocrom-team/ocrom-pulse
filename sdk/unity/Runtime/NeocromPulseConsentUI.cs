@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Neocrom.CromPulse
+namespace Neocrom.Pulse
 {
     /// <summary>
     /// Zero-asset monochrome Neocrom Consent Dialog built programmatically with Unity UI.
     /// </summary>
-    public sealed class CromPulseConsentUI : MonoBehaviour
+    public sealed class NeocromPulseConsentUI : MonoBehaviour
     {
-        private CromPulseClient _client;
+        private NeocromPulseClient _client;
         private Toggle _tgGameplay;
         private Toggle _tgPerformance;
         private Toggle _tgErrors;
@@ -18,20 +18,20 @@ namespace Neocrom.CromPulse
         private Text _previewText;
         private GameObject _previewContainer;
 
-        public static void Show(CromPulseClient client)
+        public static void Show(NeocromPulseClient client)
         {
             if (EventSystem.current == null)
             {
-                var es = new GameObject("[CromPulseEventSystem]");
+                var es = new GameObject("[NeocromPulseEventSystem]");
                 es.AddComponent<EventSystem>();
                 es.AddComponent<StandaloneInputModule>();
             }
-            var go = new GameObject("[CromPulseConsentDialog]");
-            var ui = go.AddComponent<CromPulseConsentUI>();
+            var go = new GameObject("[NeocromPulseConsentDialog]");
+            var ui = go.AddComponent<NeocromPulseConsentUI>();
             ui.Build(client);
         }
 
-        private void Build(CromPulseClient client)
+        private void Build(NeocromPulseClient client)
         {
             _client = client;
             var current = client.GetConsent();

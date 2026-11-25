@@ -2,7 +2,7 @@
  * Neocrom Pulse Web / JS SDK (v1 protocol)
  * Lightweight, privacy-first telemetry client for WebGL / HTML5 games on neocrom.pro.
  */
-export class CromPulseWeb {
+export class NeocromPulseWeb {
   constructor({ projectId, ingestKey, endpoint = '/api/v1/ingest', appVersion = '0.1.0' }) {
     this.projectId = projectId;
     this.ingestKey = ingestKey;
@@ -35,14 +35,14 @@ export class CromPulseWeb {
       project_id: this.projectId,
       session_id: this.sessionId,
       sent_at: Math.floor(Date.now() / 1000),
-      sdk: { name: 'crom-pulse-web', version: '0.1.0' },
+      sdk: { name: 'neocrom-pulse-web', version: '0.1.0' },
       engine: { name: 'web', version: 'es2024', app_version: this.appVersion },
       consent: this.consent,
       events,
     });
     const res = await fetch(this.endpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Crom-Key': this.ingestKey },
+      headers: { 'Content-Type': 'application/json', 'X-Neocrom-Key': this.ingestKey },
       body,
       keepalive: true,
     });

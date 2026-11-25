@@ -2,16 +2,16 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Neocrom.CromPulse.Editor
+namespace Neocrom.Pulse.Editor
 {
-    public sealed class CromPulseEditorWindow : EditorWindow
+    public sealed class NeocromPulseEditorWindow : EditorWindow
     {
-        private const string ConfigAssetPath = "Assets/Resources/CromPulseConfig.asset";
+        private const string ConfigAssetPath = "Assets/Resources/NeocromPulseConfig.asset";
 
         [MenuItem("Tools/Neocrom/Neocrom Pulse Setup")]
         public static void ShowWindow()
         {
-            var win = GetWindow<CromPulseEditorWindow>("Neocrom Pulse");
+            var win = GetWindow<NeocromPulseEditorWindow>("Neocrom Pulse");
             win.minSize = new Vector2(440, 340);
         }
 
@@ -19,20 +19,20 @@ namespace Neocrom.CromPulse.Editor
         {
             EditorGUILayout.Space(8);
             EditorGUILayout.LabelField("NEOCROM PULSE", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Privacy-first game analytics & telemetry for Unity. Zero scene setup required — CromPulse auto-initializes at runtime.", MessageType.Info);
+            EditorGUILayout.HelpBox("Privacy-first game analytics & telemetry for Unity. Zero scene setup required — NeocromPulse auto-initializes at runtime.", MessageType.Info);
 
             EditorGUILayout.Space(8);
-            var existing = Resources.Load<CromPulseConfig>("CromPulseConfig");
+            var existing = Resources.Load<NeocromPulseConfig>("NeocromPulseConfig");
             if (existing == null)
             {
-                if (GUILayout.Button("Create CromPulseConfig in Assets/Resources/", GUILayout.Height(34)))
+                if (GUILayout.Button("Create NeocromPulseConfig in Assets/Resources/", GUILayout.Height(34)))
                 {
                     CreateConfigAsset();
                 }
             }
             else
             {
-                if (GUILayout.Button("Select CromPulseConfig Asset", GUILayout.Height(30)))
+                if (GUILayout.Button("Select NeocromPulseConfig Asset", GUILayout.Height(30)))
                 {
                     Selection.activeObject = existing;
                     EditorGUIUtility.PingObject(existing);
@@ -42,10 +42,10 @@ namespace Neocrom.CromPulse.Editor
             EditorGUILayout.Space(12);
             EditorGUILayout.LabelField("Quick Integration (C#)", EditorStyles.boldLabel);
             EditorGUILayout.TextArea(
-                "if (!CromPulse.HasDecidedConsent()) CromPulse.ShowConsentDialog();\n" +
-                "CromPulse.TrackProgression(\"level_01\", \"completed\", 4200);\n" +
-                "CromPulse.Measure(\"world_gen\", () => GenerateMap());\n" +
-                "CromPulse.LoadSceneAsync(\"ArenaScene\");",
+                "if (!NeocromPulse.HasDecidedConsent()) NeocromPulse.ShowConsentDialog();\n" +
+                "NeocromPulse.TrackProgression(\"level_01\", \"completed\", 4200);\n" +
+                "NeocromPulse.Measure(\"world_gen\", () => GenerateMap());\n" +
+                "NeocromPulse.LoadSceneAsync(\"ArenaScene\");",
                 GUILayout.Height(78)
             );
         }
@@ -53,7 +53,7 @@ namespace Neocrom.CromPulse.Editor
         private static void CreateConfigAsset()
         {
             Directory.CreateDirectory("Assets/Resources");
-            var asset = CreateInstance<CromPulseConfig>();
+            var asset = CreateInstance<NeocromPulseConfig>();
             AssetDatabase.CreateAsset(asset, ConfigAssetPath);
             AssetDatabase.SaveAssets();
             Selection.activeObject = asset;

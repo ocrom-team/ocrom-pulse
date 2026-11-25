@@ -1,16 +1,16 @@
-class_name CromPulseClient
+class_name NeocromPulseClient
 extends Node
 
-const ConfigScript = preload("res://addons/crom_pulse/crom_pulse_config.gd")
-const PrivacyScript = preload("res://addons/crom_pulse/crom_pulse_privacy.gd")
-const PerfScript = preload("res://addons/crom_pulse/crom_pulse_perf.gd")
-const TransportScript = preload("res://addons/crom_pulse/crom_pulse_transport.gd")
+const ConfigScript = preload("res://addons/neocrom_pulse/neocrom_pulse_config.gd")
+const PrivacyScript = preload("res://addons/neocrom_pulse/neocrom_pulse_privacy.gd")
+const PerfScript = preload("res://addons/neocrom_pulse/neocrom_pulse_perf.gd")
+const TransportScript = preload("res://addons/neocrom_pulse/neocrom_pulse_transport.gd")
 
 signal consent_changed(consent: Dictionary)
 signal batch_flushed(event_count: int, success: bool)
 signal error_reported(fingerprint: String)
 
-const SDK_NAME := "crom-pulse-godot"
+const SDK_NAME := "neocrom-pulse-godot"
 const SDK_VERSION := "0.1.0"
 const ERROR_COOLDOWN_SEC := 10.0
 
@@ -43,7 +43,7 @@ func _ready() -> void:
 		config = ConfigScript.from_project_settings()
 	_perf = PerfScript.new()
 	_transport = TransportScript.new()
-	_transport.name = "CromPulseTransport"
+	_transport.name = "NeocromPulseTransport"
 	add_child(_transport)
 	_transport.setup(config)
 	_transport.request_finished.connect(_on_transport_finished)
@@ -183,7 +183,7 @@ func reset_consent() -> void:
 func show_consent_dialog(parent: Node = null) -> Node:
 	if _consent_dialog != null and is_instance_valid(_consent_dialog):
 		_consent_dialog.queue_free()
-	var dialog_script := load("res://addons/crom_pulse/ui/crom_pulse_consent_dialog.gd")
+	var dialog_script := load("res://addons/neocrom_pulse/ui/neocrom_pulse_consent_dialog.gd")
 	var dialog: Node = dialog_script.new()
 	var target := parent if parent != null else get_tree().root
 	target.add_child(dialog)
@@ -314,7 +314,7 @@ func _check_endpoint_security() -> void:
 		return
 	var url := config.endpoint_url.to_lower()
 	if url.begins_with("http://") and not (url.contains("127.0.0.1") or url.contains("localhost") or url.contains("[::1]")):
-		push_warning("[CromPulse] Using unencrypted http:// endpoint in non-local URL. Switch to https:// before shipping.")
+		push_warning("[NeocromPulse] Using unencrypted http:// endpoint in non-local URL. Switch to https:// before shipping.")
 
 
 func begin_load(zone_name: String) -> void:
@@ -477,7 +477,7 @@ func _push_event(ev: Dictionary) -> void:
 	while _event_queue.size() > config.max_queue_events:
 		_event_queue.pop_front()
 	if config.debug_logging:
-		print("[CromPulse] queued: ", ev.get("type", ""), " ", ev.get("name", ""))
+		print("[NeocromPulse] queued: ", ev.get("type", ""), " ", ev.get("name", ""))
 
 
 func _on_transport_finished(success: bool, _status_code: int) -> void:

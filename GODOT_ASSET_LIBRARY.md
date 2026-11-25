@@ -8,8 +8,8 @@ Use these exact settings when submitting **Neocrom Pulse** to the [Godot Asset L
 - **License**: `MIT`
 - **Version String**: `0.1.0`
 - **Repository Host**: GitHub (or GitLab / Codeberg)
-- **Download Commit / Tag**: e.g. `v0.1.0` (the `.gitattributes` `export-ignore` rules ensure the downloaded ZIP only installs `addons/crom_pulse/`, `LICENSE`, and `README.md` into users' projects!)
-- **Icon URL**: Raw URL to `addons/crom_pulse/icon.svg` (or a 128×128 PNG export of it, as the Asset Library web form accepts PNG/JPG/WebP URLs — if PNG is required by the web form, export `icon.svg` to a 128×128 PNG and link that!)
+- **Download Commit / Tag**: e.g. `v0.1.0` (the `.gitattributes` `export-ignore` rules ensure the downloaded ZIP only installs `addons/neocrom_pulse/`, `LICENSE`, and `README.md` into users' projects!)
+- **Icon URL**: Raw URL to `addons/neocrom_pulse/icon.svg` (or a 128×128 PNG export of it, as the Asset Library web form accepts PNG/JPG/WebP URLs — if PNG is required by the web form, export `icon.svg` to a 128×128 PNG and link that!)
 
 ## Description Template
 

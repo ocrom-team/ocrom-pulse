@@ -43,11 +43,11 @@ function readRawBody(req, maxBytes = 256 * 1024) {
   });
 }
 
-export function createCromPulseServer({
-  dbPath = process.env.CROM_PULSE_DB || resolve(process.cwd(), 'data/crom-pulse.sqlite'),
+export function createNeocromPulseServer({
+  dbPath = process.env.NEOCROM_PULSE_DB || resolve(process.cwd(), 'data/neocrom-pulse.sqlite'),
   dashboardDir = resolve(process.cwd(), 'dashboard'),
-  kThreshold = Number(process.env.CROM_PULSE_K_ANONYMITY || 5),
-  requireSignature = process.env.CROM_PULSE_REQUIRE_SIGNATURE === '1',
+  kThreshold = Number(process.env.NEOCROM_PULSE_K_ANONYMITY || 5),
+  requireSignature = process.env.NEOCROM_PULSE_REQUIRE_SIGNATURE === '1',
   seedDemo = true,
 } = {}) {
   const db = openDatabase(dbPath);
@@ -61,7 +61,7 @@ export function createCromPulseServer({
 
     // Minimal CORS headers for local dev / web SDKs
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Content-Encoding, X-Crom-Key, X-Crom-Timestamp, X-Crom-Signature');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Content-Encoding, X-Neocrom-Key, X-Neocrom-Timestamp, X-Neocrom-Signature');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS');
 
     if (req.method === 'OPTIONS') {
@@ -72,7 +72,7 @@ export function createCromPulseServer({
 
     try {
       if (req.method === 'GET' && pathname === '/api/v1/health') {
-        sendJson(res, 200, { ok: true, service: 'crom-pulse', version: '0.1.0', k_threshold: kThreshold });
+        sendJson(res, 200, { ok: true, service: 'neocrom-pulse', version: '0.1.0', k_threshold: kThreshold });
         return;
       }
 
@@ -80,9 +80,9 @@ export function createCromPulseServer({
         const rawBuffer = await readRawBody(req);
         const payload = decodeIngestBody(rawBuffer, req.headers['content-encoding']);
         const result = ingestBatch(db, payload, {
-          ingestKey: req.headers['x-crom-key'],
-          timestampHeader: req.headers['x-crom-timestamp'],
-          signatureHeader: req.headers['x-crom-signature'],
+          ingestKey: req.headers['x-neocrom-key'],
+          timestampHeader: req.headers['x-neocrom-timestamp'],
+          signatureHeader: req.headers['x-neocrom-signature'],
           rawBuffer,
           requireSignature,
         });

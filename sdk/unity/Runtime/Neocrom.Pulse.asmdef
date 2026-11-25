@@ -1,12 +1,8 @@
 {
-  "name": "Neocrom.CromPulse.Editor",
-  "rootNamespace": "Neocrom.CromPulse.Editor",
-  "references": [
-    "Neocrom.CromPulse"
-  ],
-  "includePlatforms": [
-    "Editor"
-  ],
+  "name": "Neocrom.Pulse",
+  "rootNamespace": "Neocrom.Pulse",
+  "references": [],
+  "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,
   "overrideReferences": false,

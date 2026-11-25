@@ -4,10 +4,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace Neocrom.CromPulse
+namespace Neocrom.Pulse
 {
     [Serializable]
-    public struct CromPulseConsent
+    public struct NeocromPulseConsent
     {
         public bool decided;
         public bool gameplay;
@@ -20,9 +20,9 @@ namespace Neocrom.CromPulse
         public bool AnyTelemetryGranted => gameplay || performance || errors;
     }
 
-    internal static class CromPulsePrivacy
+    internal static class NeocromPulsePrivacy
     {
-        private const string PrefPrefix = "CromPulse.Consent.";
+        private const string PrefPrefix = "NeocromPulse.Consent.";
 
         private static readonly Regex EmailRx = new Regex(@"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", RegexOptions.Compiled);
         private static readonly Regex WinUserRx = new Regex(@"[a-zA-Z]:\\Users\\[^\\\s/]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -37,9 +37,9 @@ namespace Neocrom.CromPulse
             "address", "phone", "auth", "cookie", "jwt"
         };
 
-        public static CromPulseConsent LoadConsent()
+        public static NeocromPulseConsent LoadConsent()
         {
-            return new CromPulseConsent
+            return new NeocromPulseConsent
             {
                 decided = PlayerPrefs.GetInt(PrefPrefix + "decided", 0) == 1,
                 gameplay = PlayerPrefs.GetInt(PrefPrefix + "gameplay", 0) == 1,
@@ -51,7 +51,7 @@ namespace Neocrom.CromPulse
             };
         }
 
-        public static void SaveConsent(CromPulseConsent c)
+        public static void SaveConsent(NeocromPulseConsent c)
         {
             PlayerPrefs.SetInt(PrefPrefix + "decided", c.decided ? 1 : 0);
             PlayerPrefs.SetInt(PrefPrefix + "gameplay", c.gameplay ? 1 : 0);

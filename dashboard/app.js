@@ -294,13 +294,13 @@ function openSimulatorDialog(project) {
 
     const res = await fetch('/api/v1/ingest', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Crom-Key': project.ingest_key },
+      headers: { 'Content-Type': 'application/json', 'X-Neocrom-Key': project.ingest_key },
       body: JSON.stringify({
         schema_version: 1,
         project_id: project.id,
         session_id: sessionId,
         sent_at: nowSec,
-        sdk: { name: 'crom-pulse-dashboard-sim', version: '0.1.0' },
+        sdk: { name: 'neocrom-pulse-dashboard-sim', version: '0.1.0' },
         engine: { name: project.engine_hint || 'godot', version: '4.7.2', app_version: '0.1.0' },
         consent: { gameplay: true, performance: true, errors: true, hardware: true, public_benchmark: pub },
         hardware: hwMap[cohort],
@@ -670,28 +670,28 @@ function renderSdkGuide() {
 
   const cards = el('section', { class: 'section grid-2' },
     el('div', { class: 'panel' },
-      el('div', { class: 'row-between' }, el('h3', {}, 'Godot 4 Plugin (GDScript)'), el('span', { class: 'tag strong' }, 'addons/crom_pulse')),
-      el('p', { class: 'muted', style: 'margin-top:.5rem' }, 'Drop addons/crom_pulse into your project, enable it in Project Settings → Plugins, and use the CromPulse autoload:'),
-      el('pre', { class: 'code-block' }, `if not CromPulse.has_decided_consent():
-    CromPulse.show_consent_dialog(self)
+      el('div', { class: 'row-between' }, el('h3', {}, 'Godot 4 Plugin (GDScript)'), el('span', { class: 'tag strong' }, 'addons/neocrom_pulse')),
+      el('p', { class: 'muted', style: 'margin-top:.5rem' }, 'Drop addons/neocrom_pulse into your project, enable it in Project Settings → Plugins, and use the NeocromPulse autoload:'),
+      el('pre', { class: 'code-block' }, `if not NeocromPulse.has_decided_consent():
+    NeocromPulse.show_consent_dialog(self)
 
-CromPulse.begin_load("level_01")
+NeocromPulse.begin_load("level_01")
 # ... load scene ...
-CromPulse.end_load("level_01")
+NeocromPulse.end_load("level_01")
 
-CromPulse.track_event("boss_defeated", {"boss": "warden", "attempts": 2})
-CromPulse.report_error("Missing audio bus", "warning", "audio.gd:42")`)
+NeocromPulse.track_event("boss_defeated", {"boss": "warden", "attempts": 2})
+NeocromPulse.report_error("Missing audio bus", "warning", "audio.gd:42")`)
     ),
     el('div', { class: 'panel' },
       el('div', { class: 'row-between' }, el('h3', {}, 'Cross-Engine Wire Protocol v1'), el('span', { class: 'tag' }, 'Unity · Unreal · Web')),
       el('p', { class: 'muted', style: 'margin-top:.5rem' }, 'All engines share the identical GZIP + HMAC-SHA256 JSON batch envelope (spec/telemetry-v1.schema.json):'),
-      el('pre', { class: 'code-block' }, `// Unity (sdk/unity/CromPulseClient.cs)
-CromPulseClient.Instance.TrackEvent("match_start", new { mode = "coop" });
+      el('pre', { class: 'code-block' }, `// Unity (sdk/unity/NeocromPulseClient.cs)
+NeocromPulseClient.Instance.TrackEvent("match_start", new { mode = "coop" });
 
-// Unreal Engine (sdk/unreal/CromPulseSubsystem.h)
-GetGameInstance()->GetSubsystem<UCromPulseSubsystem>()->TrackEvent(TEXT("match_start"));
+// Unreal Engine (sdk/unreal/NeocromPulseSubsystem.h)
+GetGameInstance()->GetSubsystem<UNeocromPulseSubsystem>()->TrackEvent(TEXT("match_start"));
 
-// Web / JS (sdk/web/crom-pulse.mjs)
+// Web / JS (sdk/web/neocrom-pulse.mjs)
 pulse.trackEvent("match_start", { mode: "coop" });`)
     )
   );

@@ -1,4 +1,4 @@
-class_name CromPulsePerf
+class_name NeocromPulsePerf
 extends RefCounted
 
 const RING_CAPACITY := 120

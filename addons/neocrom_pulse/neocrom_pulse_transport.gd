@@ -1,7 +1,7 @@
-class_name CromPulseTransport
+class_name NeocromPulseTransport
 extends Node
 
-const ConfigScript = preload("res://addons/crom_pulse/crom_pulse_config.gd")
+const ConfigScript = preload("res://addons/neocrom_pulse/neocrom_pulse_config.gd")
 
 signal request_finished(success: bool, status_code: int)
 
@@ -17,7 +17,7 @@ func setup(config: ConfigScript) -> void:
 	_config = config
 	if _http == null:
 		_http = HTTPRequest.new()
-		_http.name = "CromPulseHTTP"
+		_http.name = "NeocromPulseHTTP"
 		_http.timeout = 8.0
 		_http.use_threads = true
 		add_child(_http)
@@ -72,10 +72,10 @@ func send_envelope(envelope: Dictionary) -> bool:
 
 	var headers := PackedStringArray([
 		"Content-Type: application/json; charset=utf-8",
-		"X-Crom-Key: " + _config.ingest_key,
-		"X-Crom-Timestamp: " + timestamp_str,
-		"X-Crom-Signature: sha256=" + signature,
-		"User-Agent: CromPulse-Godot/0.1.0",
+		"X-Neocrom-Key: " + _config.ingest_key,
+		"X-Neocrom-Timestamp: " + timestamp_str,
+		"X-Neocrom-Signature: sha256=" + signature,
+		"User-Agent: NeocromPulse-Godot/0.1.0",
 	])
 	if use_gzip:
 		headers.append("Content-Encoding: gzip")

@@ -4,9 +4,9 @@
   "displayName": "Neocrom Pulse",
   "description": "Lightweight, modular, privacy-first game analytics and telemetry SDK for Unity, part of the Neocrom ecosystem (neocrom.pro).",
   "unity": "2021.3",
-  "documentationUrl": "https://github.com/neocrom-team/crom-pulse",
-  "changelogUrl": "https://github.com/neocrom-team/crom-pulse/releases",
-  "licensesUrl": "https://github.com/neocrom-team/crom-pulse/blob/main/LICENSE",
+  "documentationUrl": "https://github.com/neocrom-team/neocrom-pulse",
+  "changelogUrl": "https://github.com/neocrom-team/neocrom-pulse/releases",
+  "licensesUrl": "https://github.com/neocrom-team/neocrom-pulse/blob/main/LICENSE",
   "keywords": [
     "analytics",
     "telemetry",

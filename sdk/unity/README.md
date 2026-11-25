@@ -8,7 +8,7 @@ Lightweight, modular, privacy-first game analytics and telemetry SDK for **Unity
 2. Click **+ → Add package from git URL…**
 3. Enter:
    ```text
-   https://github.com/neocrom-team/crom-pulse.git?path=/sdk/unity
+   https://github.com/neocrom-team/neocrom-pulse.git?path=/sdk/unity
    ```
 4. Open **Tools → Neocrom → Neocrom Pulse Setup** and click **Create NeocromPulseConfig in Assets/Resources/**.
 5. Set your `projectId`, `ingestKey`, and `endpointUrl` in the Inspector.

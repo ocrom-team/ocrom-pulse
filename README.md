@@ -6,8 +6,19 @@
 - **Zero Fingerprinting** — ephemeral per-session IDs, no IP storage, coarsened hardware buckets, automatic PII scrubbing.
 - **Granular Consent** — built-in monochrome Neocrom Consent Dialog; zero bytes transmitted before player approval.
 - **Ultra-Low Operating Cost** — GZIP-compressed batches + zero-dependency Node.js & SQLite WAL pre-aggregated rollups.
-- **Multi-Engine Ready** — unified `v1` JSON schema (`spec/telemetry-v1.schema.json`) with a production Godot 4 plugin plus Unity, Unreal, and Web SDK adapters.
+- **Multi-Engine Ready** — unified `v1` JSON schema (`spec/telemetry-v1.schema.json`) with a production Godot 4 plugin plus Unity UPM, Unreal, and Web SDKs.
 - **Neocrom Public Game Database** — opt-in, *k*-anonymized performance benchmarks ready for `neocrom.pro` game listings.
+
+## Ecosystem & Distribution
+
+| Platform | Status / Entry Point |
+| :--- | :--- |
+| **Neocrom HQ** | [neocrom.pro](https://neocrom.pro) |
+| **GitHub Repository & Releases** | [neocrom-team/crom-pulse](https://github.com/neocrom-team/crom-pulse) · [Release v0.1.1](https://github.com/neocrom-team/crom-pulse/releases/tag/v0.1.1) |
+| **Godot Asset Library** | [Asset #25115](https://godotengine.org/asset-library/asset/edit/25115) *(Pending Moderator Approval)* |
+| **Unity Package Manager (Git)** | `https://github.com/neocrom-team/crom-pulse.git?path=/sdk/unity` |
+| **OpenUPM (`pro.neocrom.crom-pulse`)** | [openupm/openupm#7280](https://github.com/openupm/openupm/pull/7280) *(PR submitted)* |
+| **Notion Knowledge Base** | [Crom Pulse Docs](https://app.notion.com/p/42342660dfda81e9bd1acd4e9acf5785) |
 
 ## Quickstart
 

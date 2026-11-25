@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neocrom.pro/schemas/crom-pulse-v1.json",
+  "title": "Crom Pulse Telemetry Batch v1",
+  "description": "Engine-agnostic, privacy-first telemetry batch envelope for Godot, Unity, Unreal Engine, and custom engines.",
+  "type": "object",
+  "required": ["schema_version", "project_id", "session_id", "sent_at", "engine", "events"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "project_id": { "type": "string", "pattern": "^[a-z0-9_-]{3,64}$" },
+    "session_id": {
+      "type": "string",
+      "description": "Ephemeral random UUIDv4/hex per play session. Never tied to hardware IDs or cross-session tracking unless explicit opt-in.",
+      "pattern": "^[a-zA-Z0-9_-]{16,64}$"
+    },
+    "sent_at": { "type": "integer", "minimum": 1700000000 },
+    "sdk": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "maxLength": 32 },
+        "version": { "type": "string", "maxLength": 24 }
+      }
+    },
+    "engine": {
+      "type": "object",
+      "required": ["name", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "enum": ["godot", "unity", "unreal", "custom", "web"] },
+        "version": { "type": "string", "maxLength": 32 },
+        "app_version": { "type": "string", "maxLength": 32 }
+      }
+    },
+    "consent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "gameplay": { "type": "boolean" },
+        "performance": { "type": "boolean" },
+        "errors": { "type": "boolean" },
+        "hardware": { "type": "boolean" },
+        "public_benchmark": { "type": "boolean" }
+      }
+    },
+    "hardware": {
+      "type": "object",
+      "description": "Coarsened/bucketed hardware profile to prevent device fingerprinting.",
+      "additionalProperties": false,
+      "properties": {
+        "os_family": { "type": "string", "enum": ["Windows", "Linux", "macOS", "Android", "iOS", "Web", "Other"] },
+        "arch": { "type": "string", "enum": ["x86_64", "arm64", "x86", "wasm32", "other"] },
+        "cpu_cores_bucket": { "type": "string", "enum": ["1-2", "3-4", "5-8", "9-16", "17+"] },
+        "ram_gb_bucket": { "type": "string", "enum": ["<=4", "8", "16", "32", "64+"] },
+        "gpu_vendor": { "type": "string", "enum": ["NVIDIA", "AMD", "Intel", "Apple", "ARM", "Qualcomm", "Software", "Other"] },
+        "gpu_tier": { "type": "string", "maxLength": 64 },
+        "display_bucket": { "type": "string", "enum": ["<720p", "720p", "1080p", "1440p", "4K+"] },
+        "locale_lang": { "type": "string", "pattern": "^[a-z]{2,3}$" }
+      }
+    },
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "required": ["type", "ts"],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "session_start",
+              "session_heartbeat",
+              "session_end",
+              "perf_sample",
+              "load_time",
+              "error",
+              "custom"
+            ]
+          },
+          "ts": { "type": "integer", "minimum": 1700000000 },
+          "name": { "type": "string", "maxLength": 64 },
+          "duration_ms": { "type": "integer", "minimum": 0, "maximum": 86400000 },
+          "metrics": {
+            "type": "object",
+            "additionalProperties": { "type": "number" }
+          },
+          "props": {
+            "type": "object",
+            "additionalProperties": {
+              "type": ["string", "number", "boolean"]
+            }
+          },
+          "error": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "severity": { "type": "string", "enum": ["warning", "error", "fatal"] },
+              "fingerprint": { "type": "string", "maxLength": 64 },
+              "message": { "type": "string", "maxLength": 512 },
+              "source": { "type": "string", "maxLength": 160 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

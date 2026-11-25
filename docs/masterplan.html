@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Neocrom Ökosystem: Strategischer Masterplan</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm 18mm 20mm 18mm;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #111;
+      background: #fff;
+      line-height: 1.5;
+      font-size: 10.5pt;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      border-bottom: 2px solid #000;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    h1 {
+      font-size: 20pt;
+      letter-spacing: -0.04em;
+      margin: 0 0 4px 0;
+      color: #000;
+    }
+    .subtitle {
+      color: #666;
+      font-size: 11pt;
+      margin: 0;
+    }
+    .badge {
+      font-family: monospace;
+      font-size: 8.5pt;
+      background: #000;
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h2 {
+      font-size: 13pt;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 4px;
+      margin-top: 22px;
+      margin-bottom: 10px;
+      color: #000;
+      letter-spacing: -0.02em;
+    }
+    h3 {
+      font-size: 11pt;
+      margin-top: 14px;
+      margin-bottom: 4px;
+      color: #222;
+    }
+    p {
+      margin: 0 0 10px 0;
+      color: #333;
+    }
+    ul {
+      margin: 0 0 12px 0;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 4px;
+      color: #333;
+    }
+    li strong {
+      color: #000;
+    }
+    .flywheel-box {
+      border: 1px solid #000;
+      border-radius: 6px;
+      background: #fafafa;
+      padding: 14px;
+      margin: 16px 0;
+    }
+    .flywheel-step {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .flywheel-step:last-child {
+      margin-bottom: 0;
+    }
+    .step-num {
+      font-weight: bold;
+      font-family: monospace;
+      background: #000;
+      color: #fff;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8pt;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 9.5pt;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 7px 10px;
+      text-align: left;
+    }
+    th {
+      background: #f2f2f2;
+      color: #000;
+      font-weight: 600;
+    }
+    .footer {
+      margin-top: 30px;
+      border-top: 1px solid #eee;
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8.5pt;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div>
+      <h1>Neocrom Ökosystem</h1>
+      <p class="subtitle">Strategischer Masterplan & Flywheel-Architektur</p>
+    </div>
+    <div>
+      <span class="badge">Vertraulich / Blueprint</span>
+    </div>
+  </div>
+
+  <p>
+    Um ein geschlossenes, nahtlos ineinandergreifendes Ökosystem nach dem Vorbild von Apple und Google aufzubauen, werden Entwicklertools (Crom Pulse), Marktplatz (neocrom.pro) und öffentliche Telemetrie zu einer sich selbst verstärkenden Datenschleife (Flywheel) verknüpft.
+  </p>
+
+  <div class="flywheel-box">
+    <div class="flywheel-step">
+      <span class="step-num">1</span>
+      <span><strong>Adoption:</strong> Entwickler integriert das Open-Source Crom Pulse SDK (Godot, Unity, Unreal) in sein Spiel.</span>
+    </div>
+    <div class="flywheel-step">
+      <span class="step-num">2</span>
+      <span><strong>Verifizierte Daten:</strong> Spieler stimmen transparent zu; Performance- und Hardware-Daten fließen anonymisiert ein.</span>
+    </div>
+    <div class="flywheel-step">
+      <span class="step-num">3</span>
+      <span><strong>Public Game DB:</strong> Automatische k-anonymisierte Benchmarks erscheinen direkt auf der Spieleseite auf neocrom.pro.</span>
+    </div>
+    <div class="flywheel-step">
+      <span class="step-num">4</span>
+      <span><strong>Plattform-Sog:</strong> Spieler bevorzugen Neocrom dank echter Kompatibilitätsdaten; mehr Reichweite lockt weitere Studios an.</span>
+    </div>
+  </div>
+
+  <h2>Die vier strategischen Säulen</h2>
+
+  <h3>1. Strikte Standardisierung (Universal Wire Protocol v1)</h3>
+  <ul>
+    <li><strong>Einheitliches Datenschema:</strong> Jede Game-Engine sendet dasselbe JSON-Format gemäß <code>telemetry-v1.schema.json</code>. Keine fragmentierten Silos.</li>
+    <li><strong>Kryptografische Signatur:</strong> HMAC-SHA256 mit Zeitstempel sichert die Integrität gegen Manipulation und Spoofing.</li>
+    <li><strong>Privacy-by-Design:</strong> Hardware wird bereits clientseitig in Buckets (z. B. GPU-Klassen, RAM-Staffeln) vergröbert. Fingerprinting ist ausgeschlossen.</li>
+  </ul>
+
+  <h3>2. Zentrales Identitäts- & Zugangsmanagement</h3>
+  <ul>
+    <li><strong>Einheitlicher Account:</strong> Entwickler verwalten Distribution auf neocrom.pro und Telemetrie-Dashboards unter einem gemeinsamen Login.</li>
+    <li><strong>Ökosystem-Schlüssel:</strong> Der Ingest-Key autorisiert Telemetrie, schaltet aber gleichzeitig exklusive Benchmark- und Kurationstools im Portal frei.</li>
+    <li><strong>Gated Data Value:</strong> Tiefe Kohorten- und Marktanalysen stehen exklusiv Partnern des Neocrom-Ökosystems zur Verfügung.</li>
+  </ul>
+
+  <h3>3. Strategischer Hebel für Entwickler & Spieler</h3>
+  <ul>
+    <li><strong>Automatisierte Systemanforderungen:</strong> Mindestanforderungen müssen nicht geschätzt werden, sondern basieren auf empirischen Realdaten.</li>
+    <li><strong>Neocrom Quality Seal:</strong> Spiele mit stabiler Performance erhalten geprüfte Zertifikate (z. B. „Optimiert für Linux / Apple Silicon / Handhelds“).</li>
+    <li><strong>Kauf- und Download-Sicherheit:</strong> Spieler besuchen Neocrom gezielt als vertrauenswürdige Informationsquelle vor dem Kauf.</li>
+  </ul>
+
+  <h3>4. Wirtschaftlicher Plattform-Vorteil für Neocrom</h3>
+  <ul>
+    <li><strong>Geringe Betriebskosten:</strong> Voraggregierte SQL-Rollups und GZIP-Kompression halten Speicher- und Serverkosten bei praktisch O(Tage) statt O(Events).</li>
+    <li><strong>Datengestützte Kuration:</strong> Neocrom identifiziert aufstrebende Hits und stabile Studios frühzeitig anhand echter Spielzeit und Bindung.</li>
+  </ul>
+
+  <h2>Roadmap zur Skalierung</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 20%;">Phase</th>
+        <th style="width: 35%;">Meilenstein</th>
+        <th>Strategischer Fokus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Phase 1</strong></td>
+        <td>Fundament (Crom Pulse)</td>
+        <td>Godot 4 SDK, Node.js Rollup-Engine, lokales Dashboard & Schema v1.</td>
+      </tr>
+      <tr>
+        <td><strong>Phase 2</strong></td>
+        <td>Portal-Integration</td>
+        <td>Einbettung der Public Game DB als Benchmark-Reiter auf neocrom.pro.</td>
+      </tr>
+      <tr>
+        <td><strong>Phase 3</strong></td>
+        <td>Multi-Engine Rollout</td>
+        <td>Veröffentlichung der offiziellen Packages für Unity und Unreal Engine.</td>
+      </tr>
+      <tr>
+        <td><strong>Phase 4</strong></td>
+        <td>Ökosystem-Lock-in</td>
+        <td>Zertifizierungs-Badges, automatisierte Bug-Cluster-Analysen für Publisher.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <span>Neocrom Ecosystem Blueprint &copy; 2026</span>
+    <span>Architektur-Referenz: crom-pulse / spec / v1</span>
+  </div>
+
+</body>
+</html>

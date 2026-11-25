@@ -1,0 +1,23 @@
+# Normalize EOL for all files that Git considers text files.
+* text=auto eol=lf
+
+# Godot Asset Library export-ignore:
+# Ensures GitHub/GitLab release archives submitted to the Godot Asset Library
+# contain only addons/crom_pulse/ and LICENSE/README.md without backend/test files.
+/server export-ignore
+/dashboard export-ignore
+/sdk export-ignore
+/tests export-ignore
+/docs export-ignore
+/spec export-ignore
+/demo export-ignore
+/data export-ignore
+/.godot export-ignore
+/package.json export-ignore
+/project.godot export-ignore
+/icon.svg export-ignore
+/icon.svg.import export-ignore
+/.gitignore export-ignore
+/.editorconfig export-ignore
+/.gitattributes export-ignore
+/GODOT_ASSET_LIBRARY.md export-ignore

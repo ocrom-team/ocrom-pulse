@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://ddfyb6fagd3ue"]
+
+[ext_resource type="Script" uid="uid://cj33bhyd7vt7g" path="res://demo/demo_scene.gd" id="1_demo"]
+
+[node name="DemoScene" type="Control" unique_id=1484834848]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_demo")
+
+[node name="BG" type="ColorRect" parent="." unique_id=324496844]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=1147461350]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 32
+
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=2101891835]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="Margin/VBox" unique_id=1889457751]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "NEOCROM // CROM PULSE — GODOT 4 SANDBOX"
+
+[node name="StatusLabel" type="Label" parent="Margin/VBox" unique_id=642134397]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.694118, 0.694118, 0.694118, 1)
+text = "Initializing..."
+
+[node name="Buttons" type="HBoxContainer" parent="Margin/VBox" unique_id=1274954688]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ConsentBtn" type="Button" parent="Margin/VBox/Buttons" unique_id=1511879658]
+layout_mode = 2
+text = "Consent UI"
+
+[node name="EventBtn" type="Button" parent="Margin/VBox/Buttons" unique_id=1284949413]
+layout_mode = 2
+text = "Track Custom Event"
+
+[node name="LoadBtn" type="Button" parent="Margin/VBox/Buttons" unique_id=174824453]
+layout_mode = 2
+text = "Measure Load Time"
+
+[node name="PerfBtn" type="Button" parent="Margin/VBox/Buttons" unique_id=493646211]
+layout_mode = 2
+text = "Sample FPS/RAM"
+
+[node name="ErrorBtn" type="Button" parent="Margin/VBox/Buttons" unique_id=573226707]
+layout_mode = 2
+text = "Report Scrubbed Error"
+
+[node name="FlushBtn" type="Button" parent="Margin/VBox/Buttons" unique_id=1229224565]
+layout_mode = 2
+text = "Flush to API"
+
+[node name="PreviewLabel" type="Label" parent="Margin/VBox" unique_id=1671311024]
+layout_mode = 2
+text = "Live Privacy Payload Preview (sent only with player consent):"
+
+[node name="PreviewText" type="TextEdit" parent="Margin/VBox" unique_id=1281260770]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+editable = false
+
+[connection signal="pressed" from="Margin/VBox/Buttons/ConsentBtn" to="." method="_on_consent_btn_pressed"]
+[connection signal="pressed" from="Margin/VBox/Buttons/EventBtn" to="." method="_on_event_btn_pressed"]
+[connection signal="pressed" from="Margin/VBox/Buttons/LoadBtn" to="." method="_on_load_btn_pressed"]
+[connection signal="pressed" from="Margin/VBox/Buttons/PerfBtn" to="." method="_on_perf_btn_pressed"]
+[connection signal="pressed" from="Margin/VBox/Buttons/ErrorBtn" to="." method="_on_error_btn_pressed"]
+[connection signal="pressed" from="Margin/VBox/Buttons/FlushBtn" to="." method="_on_flush_btn_pressed"]

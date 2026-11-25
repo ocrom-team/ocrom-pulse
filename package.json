@@ -1,0 +1,14 @@
+{
+  "name": "crom-pulse",
+  "version": "0.1.0",
+  "description": "Lightweight, modular, privacy-first game analytics and telemetry platform for the Neocrom ecosystem.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "start": "node server/index.mjs",
+    "test": "node --test tests/server/*.test.mjs"
+  }
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Crom Pulse — Lightweight, privacy-first game analytics and public benchmark database for the Neocrom ecosystem.">
+  <meta name="color-scheme" content="dark">
+  <title>neocrom // crom pulse</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <div class="nav-wrap">
+      <a class="brand" href="#analytics" aria-label="neocrom crom pulse home">
+        <span class="brand-mark" aria-hidden="true"></span>neocrom <span class="brand-sub">pulse</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#analytics" data-view="analytics">Analytics</a>
+        <a href="#public-db" data-view="public-db">Public Game DB</a>
+        <a href="#sdk" data-view="sdk">SDK &amp; Privacy</a>
+      </nav>
+      <div class="actions">
+        <button id="live-toggle-btn" class="chip" type="button" aria-pressed="true" title="Auto-refresh every 5s">
+          <span class="pulse-dot" aria-hidden="true"></span>Live 5s
+        </button>
+        <button id="new-project-btn" class="button small" type="button">+ New Project</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <p class="loading">Loading Crom Pulse telemetry …</p>
+  </main>
+
+  <footer>
+    <div class="footer-wrap">
+      <span class="brand footer-brand">neocrom // pulse</span>
+      <a href="#analytics">Analytics</a>
+      <a href="#public-db">Public Game DB</a>
+      <a href="#sdk">Open Source SDK (MIT)</a>
+      <span class="muted">Zero IP storage · Ephemeral IDs · k-Anonymized</span>
+    </div>
+  </footer>
+
+  <dialog id="dialog" aria-labelledby="dialog-title"></dialog>
+  <div id="notice" class="notice" role="status" hidden></div>
+</body>
+</html>

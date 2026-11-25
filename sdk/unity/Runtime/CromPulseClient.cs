@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 namespace Neocrom.CromPulse
 {
     /// <summary>
-    /// Static developer-facing facade for Crom Pulse in Unity.
+    /// Static developer-facing facade for Neocrom Pulse in Unity.
     /// Auto-initializes via RuntimeInitializeOnLoadMethod; zero scene setup required.
     /// </summary>
     public static class CromPulse

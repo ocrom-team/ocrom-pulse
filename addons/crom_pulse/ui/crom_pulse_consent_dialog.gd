@@ -45,7 +45,7 @@ func _build_ui() -> void:
 	panel.add_child(root_box)
 
 	var header := Label.new()
-	header.text = "NEOCROM // CROM PULSE TELEMETRY"
+	header.text = "NEOCROM PULSE TELEMETRY"
 	header.add_theme_font_size_override("font_size", 18)
 	header.add_theme_color_override("font_color", Color.WHITE)
 	root_box.add_child(header)

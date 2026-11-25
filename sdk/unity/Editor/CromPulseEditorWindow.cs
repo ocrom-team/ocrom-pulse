@@ -8,17 +8,17 @@ namespace Neocrom.CromPulse.Editor
     {
         private const string ConfigAssetPath = "Assets/Resources/CromPulseConfig.asset";
 
-        [MenuItem("Tools/Neocrom/Crom Pulse Setup")]
+        [MenuItem("Tools/Neocrom/Neocrom Pulse Setup")]
         public static void ShowWindow()
         {
-            var win = GetWindow<CromPulseEditorWindow>("Crom Pulse");
+            var win = GetWindow<CromPulseEditorWindow>("Neocrom Pulse");
             win.minSize = new Vector2(440, 340);
         }
 
         private void OnGUI()
         {
             EditorGUILayout.Space(8);
-            EditorGUILayout.LabelField("NEOCROM // CROM PULSE", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("NEOCROM PULSE", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Privacy-first game analytics & telemetry for Unity. Zero scene setup required — CromPulse auto-initializes at runtime.", MessageType.Info);
 
             EditorGUILayout.Space(8);

@@ -1,7 +1,7 @@
 {
   "name": "pro.neocrom.crom-pulse",
   "version": "0.1.1",
-  "displayName": "Crom Pulse",
+  "displayName": "Neocrom Pulse",
   "description": "Lightweight, modular, privacy-first game analytics and telemetry SDK for Unity, part of the Neocrom ecosystem (neocrom.pro).",
   "unity": "2021.3",
   "documentationUrl": "https://github.com/neocrom-team/crom-pulse",
@@ -16,7 +16,7 @@
     "neocrom"
   ],
   "author": {
-    "name": "Neocrom / Crom Pulse Contributors",
+    "name": "Neocrom Contributors",
     "url": "https://neocrom.pro"
   }
 }

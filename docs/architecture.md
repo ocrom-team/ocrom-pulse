@@ -1,6 +1,6 @@
-# Crom Pulse — Architecture & Multi-Engine Blueprint
+# Neocrom Pulse — Architecture & Multi-Engine Blueprint
 
-Crom Pulse is a lightweight, modular, privacy-first telemetry platform built for the **Neocrom** ecosystem (`neocrom.pro`).
+Neocrom Pulse is a lightweight, modular, privacy-first telemetry platform built for the **Neocrom** ecosystem (`neocrom.pro`).
 
 ## Core Design Principles
 

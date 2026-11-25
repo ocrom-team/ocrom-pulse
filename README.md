@@ -1,6 +1,6 @@
-# Crom Pulse
+# Neocrom Pulse
 
-**Crom Pulse** is a lightweight, modular, privacy-first game analytics and telemetry platform built for the **Neocrom** ecosystem (`neocrom.pro`).
+**Neocrom Pulse** is a lightweight, modular, privacy-first game analytics and telemetry platform built for the **Neocrom** ecosystem (`neocrom.pro`).
 
 - **Open Source (MIT)** — free to self-host or integrate into indie and commercial games.
 - **Zero Fingerprinting** — ephemeral per-session IDs, no IP storage, coarsened hardware buckets, automatic PII scrubbing.
@@ -18,7 +18,7 @@
 | **Godot Asset Library** | [Asset #25115](https://godotengine.org/asset-library/asset/edit/25115) *(Pending Moderator Approval)* |
 | **Unity Package Manager (Git)** | `https://github.com/neocrom-team/crom-pulse.git?path=/sdk/unity` |
 | **OpenUPM (`pro.neocrom.crom-pulse`)** | [openupm/openupm#7280](https://github.com/openupm/openupm/pull/7280) *(PR submitted)* |
-| **Notion Knowledge Base** | [Crom Pulse Docs](https://app.notion.com/p/42342660dfda81e9bd1acd4e9acf5785) |
+| **Notion Knowledge Base** | [Neocrom Pulse Docs](https://app.notion.com/p/42342660dfda81e9bd1acd4e9acf5785) |
 
 ## Quickstart
 
@@ -38,7 +38,7 @@ Open **http://127.0.0.1:4318** to inspect:
 ### 2. Integrate the Godot 4 Plugin
 
 1. Copy `addons/crom_pulse/` into your Godot 4 project's `res://addons/crom_pulse/`.
-2. Enable **Crom Pulse** under **Project → Project Settings → Plugins**.
+2. Enable **Neocrom Pulse** under **Project → Project Settings → Plugins**.
 3. Configure `crom_pulse/project_id`, `crom_pulse/ingest_key`, and `crom_pulse/endpoint_url` in Project Settings.
 4. Use the `CromPulse` autoload anywhere in GDScript:
 

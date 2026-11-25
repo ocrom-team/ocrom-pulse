@@ -665,7 +665,7 @@ async function renderPublicDb() {
 function renderSdkGuide() {
   const head = el('section', { class: 'page-head' },
     el('h1', {}, 'Open Source SDK & Privacy'),
-    el('p', {}, 'Integrate Crom Pulse into Godot 4, Unity, Unreal Engine, or Web games in minutes. MIT licensed, modular, and built around strict data minimization.')
+    el('p', {}, 'Integrate Neocrom Pulse into Godot 4, Unity, Unreal Engine, or Web games in minutes. MIT licensed, modular, and built around strict data minimization.')
   );
 
   const cards = el('section', { class: 'section grid-2' },
@@ -813,7 +813,7 @@ async function render() {
     else await renderAnalytics();
   } catch (err) {
     main.replaceChildren(el('div', { class: 'panel', style: 'margin-top:2rem;' },
-      el('h2', {}, 'Unable to load Crom Pulse data'),
+      el('h2', {}, 'Unable to load Neocrom Pulse data'),
       el('p', { class: 'muted', style: 'margin-top:.5rem;' }, err.message)
     ));
   }

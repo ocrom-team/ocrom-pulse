@@ -1,5 +1,5 @@
 /**
- * Crom Pulse Web / JS SDK (v1 protocol)
+ * Neocrom Pulse Web / JS SDK (v1 protocol)
  * Lightweight, privacy-first telemetry client for WebGL / HTML5 games on neocrom.pro.
  */
 export class CromPulseWeb {

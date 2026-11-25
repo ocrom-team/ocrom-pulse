@@ -137,7 +137,7 @@ export function seedDemoDataIfEmpty(db) {
       engine_hint: 'godot',
       ingest_key: 'cp_demo_public_ingest_key_2026',
       public_listing: 1,
-      description: 'Official Godot 4 reference showcase for Crom Pulse telemetry and performance benchmarks.',
+      description: 'Official Godot 4 reference showcase for Neocrom Pulse telemetry and performance benchmarks.',
     },
     {
       id: 'void-drift',

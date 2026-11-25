@@ -60,7 +60,7 @@ namespace Neocrom.CromPulse
             layout.childForceExpandWidth = true;
             layout.childForceExpandHeight = false;
 
-            CreateLabel(modal.transform, "NEOCROM // CROM PULSE TELEMETRY", 18, Color.white, FontStyle.Bold);
+            CreateLabel(modal.transform, "NEOCROM PULSE TELEMETRY", 18, Color.white, FontStyle.Bold);
             CreateLabel(modal.transform, "Transparent, privacy-first diagnostics. Zero persistent tracking IDs, zero IP logging.", 13, new Color(0.7f, 0.7f, 0.7f, 1f), FontStyle.Normal);
 
             _tgGameplay = CreateToggle(modal.transform, "Gameplay & Session Duration (ephemeral random ID)", !current.decided || current.gameplay);

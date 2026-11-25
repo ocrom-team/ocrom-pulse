@@ -1,4 +1,4 @@
-// Crom Pulse Unreal Engine SDK Adapter (v1 Wire Protocol)
+// Neocrom Pulse Unreal Engine SDK Adapter (v1 Wire Protocol)
 // Drop-in UGameInstanceSubsystem blueprint for Unreal Engine 5.x.
 #pragma once
 

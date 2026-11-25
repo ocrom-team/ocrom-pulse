@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace Neocrom.CromPulse
 {
-    [CreateAssetMenu(fileName = "CromPulseConfig", menuName = "Neocrom/Crom Pulse Config", order = 10)]
+    [CreateAssetMenu(fileName = "CromPulseConfig", menuName = "Neocrom/Neocrom Pulse Config", order = 10)]
     public sealed class CromPulseConfig : ScriptableObject
     {
         [Header("Neocrom Project")]
-        [Tooltip("Project slug registered in your Crom Pulse dashboard (e.g. neocrom-demo).")]
+        [Tooltip("Project slug registered in your Neocrom Pulse dashboard (e.g. neocrom-demo).")]
         public string projectId = "neocrom-demo";
 
         [Tooltip("Project ingest key used for authentication and HMAC-SHA256 payload signing.")]

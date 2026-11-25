@@ -44,7 +44,7 @@ func _exit_tree() -> void:
 
 
 func _get_plugin_name() -> String:
-	return "Crom Pulse"
+	return "Neocrom Pulse"
 
 
 func _get_plugin_icon() -> Texture2D:

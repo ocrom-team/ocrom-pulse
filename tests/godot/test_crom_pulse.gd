@@ -18,7 +18,7 @@ func _assert(cond: bool, msg: String) -> void:
 
 
 func _initialize() -> void:
-	print("=== Crom Pulse Godot 4 SDK Unit Tests ===")
+	print("=== Neocrom Pulse Godot 4 SDK Unit Tests ===")
 
 	var client := ClientScript.new()
 	client.name = "TestCromPulse"

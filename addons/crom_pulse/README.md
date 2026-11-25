@@ -1,4 +1,4 @@
-# Crom Pulse — Godot 4 Plugin
+# Neocrom Pulse — Godot 4 Plugin
 
 Lightweight, modular, privacy-first game analytics and telemetry SDK for Godot 4.x (part of the [Neocrom](https://neocrom.pro) ecosystem).
 
@@ -13,8 +13,8 @@ Lightweight, modular, privacy-first game analytics and telemetry SDK for Godot 4
 ## Installation
 
 1. Install via the **Godot Asset Library** (or copy `addons/crom_pulse` into your project's `res://addons/`).
-2. Enable **Crom Pulse** under **Project → Project Settings → Plugins**.
-3. Configure `crom_pulse/project_id`, `crom_pulse/ingest_key`, and `crom_pulse/endpoint_url` in **Project Settings → Crom Pulse**.
+2. Enable **Neocrom Pulse** under **Project → Project Settings → Plugins**.
+3. Configure `crom_pulse/project_id`, `crom_pulse/ingest_key`, and `crom_pulse/endpoint_url` in **Project Settings → Neocrom Pulse**.
 
 ## Quick Usage
 

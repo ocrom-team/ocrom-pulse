@@ -1,8 +1,8 @@
 # Godot Asset Library Submission Guide
 
-Use these exact settings when submitting **Crom Pulse** to the [Godot Asset Library](https://godotengine.org/asset-library/asset):
+Use these exact settings when submitting **Neocrom Pulse** to the [Godot Asset Library](https://godotengine.org/asset-library/asset):
 
-- **Title**: `Crom Pulse`
+- **Title**: `Neocrom Pulse`
 - **Category**: `Tools` (or `Misc`)
 - **Godot Version**: `4.3` (compatible with 4.3 – 4.7+)
 - **License**: `MIT`
@@ -13,7 +13,7 @@ Use these exact settings when submitting **Crom Pulse** to the [Godot Asset Libr
 
 ## Description Template
 
-> **Crom Pulse** is a lightweight, modular, privacy-first game analytics and telemetry SDK for Godot 4, built for the Neocrom ecosystem (`neocrom.pro`).
+> **Neocrom Pulse** is a lightweight, modular, privacy-first game analytics and telemetry SDK for Godot 4, built for the Neocrom ecosystem (`neocrom.pro`).
 >
 > **Key Features:**
 > - **Session & Activity Tracking**: Ephemeral per-session IDs, active play duration, and heartbeats.

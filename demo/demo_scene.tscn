@@ -39,7 +39,7 @@ theme_override_constants/separation = 14
 [node name="Title" type="Label" parent="Margin/VBox" unique_id=1889457751]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "NEOCROM // CROM PULSE — GODOT 4 SANDBOX"
+text = "NEOCROM PULSE — GODOT 4 SANDBOX"
 
 [node name="StatusLabel" type="Label" parent="Margin/VBox" unique_id=642134397]
 unique_name_in_owner = true

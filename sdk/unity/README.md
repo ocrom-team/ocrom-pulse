@@ -1,4 +1,4 @@
-# Crom Pulse — Unity SDK (UPM Package)
+# Neocrom Pulse — Unity SDK (UPM Package)
 
 Lightweight, modular, privacy-first game analytics and telemetry SDK for **Unity 2021.3+ / Unity 6**, part of the [Neocrom](https://neocrom.pro) ecosystem.
 
@@ -10,7 +10,7 @@ Lightweight, modular, privacy-first game analytics and telemetry SDK for **Unity
    ```text
    https://github.com/neocrom-team/crom-pulse.git?path=/sdk/unity
    ```
-4. Open **Tools → Neocrom → Crom Pulse Setup** and click **Create CromPulseConfig in Assets/Resources/**.
+4. Open **Tools → Neocrom → Neocrom Pulse Setup** and click **Create CromPulseConfig in Assets/Resources/**.
 5. Set your `projectId`, `ingestKey`, and `endpointUrl` in the Inspector.
 
 **Zero scene setup required:** `CromPulse` auto-bootstraps via `[RuntimeInitializeOnLoadMethod]` and survives scene loads automatically.

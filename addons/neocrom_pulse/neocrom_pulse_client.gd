@@ -11,7 +11,7 @@ signal batch_flushed(event_count: int, success: bool)
 signal error_reported(fingerprint: String)
 
 const SDK_NAME := "neocrom-pulse-godot"
-const SDK_VERSION := "0.3.0"
+const SDK_VERSION := "0.3.1"
 const ERROR_COOLDOWN_SEC := 10.0
 
 var config: ConfigScript

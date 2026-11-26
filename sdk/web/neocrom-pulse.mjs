@@ -36,7 +36,7 @@ export class NeocromPulseWeb {
       project_id: this.projectId,
       session_id: this.sessionId,
       sent_at: Math.floor(Date.now() / 1000),
-      sdk: { name: 'neocrom-pulse-web', version: '0.3.0' },
+      sdk: { name: 'neocrom-pulse-web', version: '0.3.1' },
       engine: { name: 'web', version: 'es2024', app_version: this.appVersion, environment: this.environment },
       consent: this.consent,
       events,

@@ -1,4 +1,4 @@
-# Neocrom Pulse — Godot 4 Plugin (v0.3.0)
+# Neocrom Pulse — Godot 4 Plugin (v0.3.1)
 
 Lightweight, modular, privacy-first game analytics and telemetry SDK for **Godot 4.x** (GDScript & C#/.NET), built for the [Neocrom](https://neocrom.pro) ecosystem.
 

@@ -78,7 +78,7 @@ func send_envelope(envelope: Dictionary) -> bool:
 		"X-Neocrom-Signature: sha256=" + signature,
 	])
 	if not is_web:
-		headers.append("User-Agent: NeocromPulse-Godot/0.3.0")
+		headers.append("User-Agent: NeocromPulse-Godot/0.3.1")
 	if use_gzip:
 		headers.append("Content-Encoding: gzip")
 

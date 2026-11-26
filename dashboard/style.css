@@ -63,34 +63,11 @@ code, pre { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; }
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: .65rem;
-  font-size: 1.55rem;
-  font-weight: 700;
-  letter-spacing: -.085em;
-  color: #fff;
-  text-decoration: none;
-  white-space: nowrap;
-  line-height: 1;
 }
-.brand-sub {
-  font-weight: 400;
-  color: var(--muted);
-  letter-spacing: -.03em;
-  font-size: 1.1rem;
-}
-.brand-mark {
-  width: 14px;
-  height: 14px;
-  border: 1px solid #fff;
-  rotate: 45deg;
-  position: relative;
-  margin-inline: 3px;
-}
-.brand-mark::after {
-  content: '';
-  position: absolute;
-  inset: 3px;
-  background: #fff;
+.brand-wordmark {
+  display: block;
+  width: auto;
+  height: 30px;
 }
 
 nav { display: flex; gap: 1.65rem; align-self: stretch; align-items: stretch; }
@@ -379,7 +356,8 @@ footer { border-top: 1px solid var(--border); }
   padding: .75rem 0;
 }
 .footer-wrap a { color: var(--muted); font-size: .86rem; }
-.footer-brand { margin-right: auto; font-size: 1.2rem; }
+.footer-brand { margin-right: auto; }
+.footer-brand .brand-wordmark { height: 25px; }
 
 dialog {
   width: min(calc(100% - 32px), 540px);

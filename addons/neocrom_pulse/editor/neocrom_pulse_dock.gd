@@ -280,7 +280,7 @@ func _on_send_test_event() -> void:
 		"project_id": pid,
 		"session_id": "editor_test_" + str(now),
 		"sent_at": now,
-		"sdk": {"name": "neocrom-pulse-godot-editor", "version": "0.3.0"},
+		"sdk": {"name": "neocrom-pulse-godot-editor", "version": "0.3.1"},
 		"engine": {"name": "godot", "version": Engine.get_version_info().get("string", "4.x"), "app_version": _ed_app_version.text, "environment": ENV_OPTIONS[_opt_env.selected]},
 		"consent": {"gameplay": true, "performance": false, "errors": false, "hardware": false, "public_benchmark": false},
 		"events": [{"type": "custom", "ts": now, "name": "editor_ping"}],

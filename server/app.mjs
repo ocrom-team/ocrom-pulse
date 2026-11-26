@@ -72,7 +72,7 @@ export function createNeocromPulseServer({
 
     try {
       if (req.method === 'GET' && pathname === '/api/v1/health') {
-        sendJson(res, 200, { ok: true, service: 'neocrom-pulse', version: '0.3.0', k_threshold: kThreshold });
+        sendJson(res, 200, { ok: true, service: 'neocrom-pulse', version: '0.3.1', k_threshold: kThreshold });
         return;
       }
 

@@ -18,6 +18,9 @@ namespace Neocrom.Pulse
         [Tooltip("Override Application.version if needed.")]
         public string appVersionOverride = "";
 
+        [Tooltip("Deployment environment (dev, staging, prod).")]
+        public string environment = "dev";
+
         [Header("Privacy & Consent")]
         [Tooltip("When enabled, zero telemetry is collected or sent until the player decides.")]
         public bool requireConsent = true;

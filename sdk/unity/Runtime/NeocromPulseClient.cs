@@ -77,7 +77,7 @@ namespace Neocrom.Pulse
     public sealed class NeocromPulseClient : MonoBehaviour
     {
         public const string SdkName = "neocrom-pulse-unity";
-        public const string SdkVersion = "0.2.0";
+        public const string SdkVersion = "0.3.0";
         private const float ErrorCooldownSec = 10f;
 
         private static NeocromPulseClient _instance;
@@ -478,7 +478,7 @@ namespace Neocrom.Pulse
                 { "session_id", _sessionId },
                 { "sent_at", DateTimeOffset.UtcNow.ToUnixTimeSeconds() },
                 { "sdk", new Dictionary<string, object> { { "name", SdkName }, { "version", SdkVersion } } },
-                { "engine", new Dictionary<string, object> { { "name", "unity" }, { "version", Application.unityVersion }, { "app_version", config.EffectiveAppVersion } } },
+                { "engine", new Dictionary<string, object> { { "name", "unity" }, { "version", Application.unityVersion }, { "app_version", config.EffectiveAppVersion }, { "environment", string.IsNullOrEmpty(config.environment) ? "dev" : config.environment } } },
                 {
                     "consent", new Dictionary<string, object>
                     {

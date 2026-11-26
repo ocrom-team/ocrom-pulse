@@ -3,11 +3,12 @@
  * Lightweight, privacy-first telemetry client for WebGL / HTML5 games on neocrom.pro.
  */
 export class NeocromPulseWeb {
-  constructor({ projectId, ingestKey, endpoint = '/api/v1/ingest', appVersion = '0.1.0' }) {
+  constructor({ projectId, ingestKey, endpoint = '/api/v1/ingest', appVersion = '0.1.0', environment = 'dev' }) {
     this.projectId = projectId;
     this.ingestKey = ingestKey;
     this.endpoint = endpoint;
     this.appVersion = appVersion;
+    this.environment = environment;
     this.sessionId = crypto.randomUUID().replace(/-/g, '');
     this.consent = { decided: false, gameplay: false, performance: false, errors: false, hardware: false, public_benchmark: false };
     this.queue = [];
@@ -35,8 +36,8 @@ export class NeocromPulseWeb {
       project_id: this.projectId,
       session_id: this.sessionId,
       sent_at: Math.floor(Date.now() / 1000),
-      sdk: { name: 'neocrom-pulse-web', version: '0.1.0' },
-      engine: { name: 'web', version: 'es2024', app_version: this.appVersion },
+      sdk: { name: 'neocrom-pulse-web', version: '0.3.0' },
+      engine: { name: 'web', version: 'es2024', app_version: this.appVersion, environment: this.environment },
       consent: this.consent,
       events,
     });

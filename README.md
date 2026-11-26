@@ -14,10 +14,10 @@
 | Platform | Status / Entry Point |
 | :--- | :--- |
 | **Neocrom HQ** | [neocrom.pro](https://neocrom.pro) |
-| **GitHub Repository & Releases** | [neocrom-team/neocrom-pulse](https://github.com/neocrom-team/neocrom-pulse) · [Release v0.1.1](https://github.com/neocrom-team/neocrom-pulse/releases/tag/v0.1.1) |
+| **GitHub Repository & Releases** | [neocrom-team/neocrom-pulse](https://github.com/neocrom-team/neocrom-pulse) · [Release v0.2.0](https://github.com/neocrom-team/neocrom-pulse/releases/tag/v0.2.0) |
 | **Godot Asset Library** | [Asset #25115](https://godotengine.org/asset-library/asset/edit/25115) *(Pending Moderator Approval)* |
 | **Unity Package Manager (Git)** | `https://github.com/neocrom-team/neocrom-pulse.git?path=/sdk/unity` |
-| **OpenUPM (`pro.neocrom.pulse`)** | [openupm/openupm#7280](https://github.com/openupm/openupm/pull/7280) *(PR submitted)* |
+| **OpenUPM (`pro.neocrom.pulse`)** | [openupm.com/packages/pro.neocrom.pulse](https://openupm.com/packages/pro.neocrom.pulse/) *(Merged via [#7280](https://github.com/openupm/openupm/pull/7280))* |
 | **Notion Knowledge Base** | [Neocrom Pulse Docs](https://app.notion.com/p/42342660dfda81e9bd1acd4e9acf5785) |
 
 ## Quickstart

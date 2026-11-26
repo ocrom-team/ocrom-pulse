@@ -77,7 +77,7 @@ namespace Neocrom.Pulse
     public sealed class NeocromPulseClient : MonoBehaviour
     {
         public const string SdkName = "neocrom-pulse-unity";
-        public const string SdkVersion = "0.1.0";
+        public const string SdkVersion = "0.2.0";
         private const float ErrorCooldownSec = 10f;
 
         private static NeocromPulseClient _instance;

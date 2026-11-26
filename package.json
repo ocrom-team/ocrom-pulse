@@ -1,6 +1,6 @@
 {
   "name": "neocrom-pulse",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Lightweight, modular, privacy-first game analytics and telemetry platform for the Neocrom ecosystem.",
   "type": "module",
   "license": "MIT",

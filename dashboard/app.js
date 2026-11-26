@@ -376,7 +376,7 @@ async function renderAnalytics() {
       el('div', { class: 'actions' }, simBtn, exportBtn, resetBtn, publicToggleBtn)
     ),
     el('div', { class: 'graphic', 'aria-hidden': 'true' },
-      el('div', { class: 'orbits' }, el('i'), el('i'), el('i'), el('i'), el('i'))
+      el('img', { src: '/icon.svg', alt: '', width: 170, height: 170, style: 'display:block;filter:drop-shadow(0 0 24px rgba(255,255,255,0.08));' })
     )
   );
 

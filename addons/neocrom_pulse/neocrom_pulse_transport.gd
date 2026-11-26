@@ -19,7 +19,7 @@ func setup(config: ConfigScript) -> void:
 		_http = HTTPRequest.new()
 		_http.name = "NeocromPulseHTTP"
 		_http.timeout = 8.0
-		_http.use_threads = true
+		_http.use_threads = not OS.has_feature("web")
 		add_child(_http)
 		_http.request_completed.connect(_on_request_completed)
 
@@ -55,10 +55,11 @@ func send_envelope(envelope: Dictionary) -> bool:
 	if not can_attempt_send():
 		return false
 
+	var is_web := OS.has_feature("web")
 	var json_str := JSON.stringify(envelope)
 	var raw_bytes := json_str.to_utf8_buffer()
 	var body_bytes := raw_bytes
-	var use_gzip := _config.enable_gzip and raw_bytes.size() >= 128
+	var use_gzip := _config.enable_gzip and raw_bytes.size() >= 128 and not (is_web and _config.web_disable_gzip)
 
 	if use_gzip:
 		var compressed := raw_bytes.compress(FileAccess.COMPRESSION_GZIP)
@@ -75,8 +76,9 @@ func send_envelope(envelope: Dictionary) -> bool:
 		"X-Neocrom-Key: " + _config.ingest_key,
 		"X-Neocrom-Timestamp: " + timestamp_str,
 		"X-Neocrom-Signature: sha256=" + signature,
-		"User-Agent: NeocromPulse-Godot/0.1.0",
 	])
+	if not is_web:
+		headers.append("User-Agent: NeocromPulse-Godot/0.3.0")
 	if use_gzip:
 		headers.append("Content-Encoding: gzip")
 
@@ -196,3 +198,36 @@ func clear_offline_queue() -> void:
 	var path := _config.offline_queue_path
 	if FileAccess.file_exists(path):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+
+
+func send_beacon_web(envelope: Dictionary) -> bool:
+	if _config == null or not OS.has_feature("web") or not Engine.has_singleton("JavaScriptBridge"):
+		return false
+	var payload := JSON.stringify(envelope)
+	var url_json := JSON.stringify(_config.endpoint_url)
+	var key_json := JSON.stringify(_config.ingest_key)
+	var js := """
+	(function() {
+		try {
+			var url = %s;
+			var payload = %s;
+			var key = %s;
+			if (typeof fetch === 'function') {
+				fetch(url, {
+					method: 'POST',
+					keepalive: true,
+					headers: { 'Content-Type': 'application/json', 'X-Neocrom-Key': key },
+					body: payload
+				});
+				return true;
+			}
+			if (navigator && typeof navigator.sendBeacon === 'function') {
+				var blob = new Blob([payload], { type: 'application/json' });
+				return navigator.sendBeacon(url, blob);
+			}
+		} catch (e) {}
+		return false;
+	})();
+	""" % [url_json, JSON.stringify(payload), key_json]
+	var bridge := Engine.get_singleton("JavaScriptBridge")
+	return bool(bridge.call("eval", js))

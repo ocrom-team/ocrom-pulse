@@ -30,7 +30,8 @@
       "properties": {
         "name": { "type": "string", "enum": ["godot", "unity", "unreal", "custom", "web"] },
         "version": { "type": "string", "maxLength": 32 },
-        "app_version": { "type": "string", "maxLength": 32 }
+        "app_version": { "type": "string", "maxLength": 32 },
+        "environment": { "type": "string", "enum": ["dev", "staging", "prod"] }
       }
     },
     "consent": {
@@ -56,7 +57,8 @@
         "gpu_vendor": { "type": "string", "enum": ["NVIDIA", "AMD", "Intel", "Apple", "ARM", "Qualcomm", "Software", "Other"] },
         "gpu_tier": { "type": "string", "maxLength": 64 },
         "display_bucket": { "type": "string", "enum": ["<720p", "720p", "1080p", "1440p", "4K+"] },
-        "locale_lang": { "type": "string", "pattern": "^[a-z]{2,3}$" }
+        "locale_lang": { "type": "string", "pattern": "^[a-z]{2,3}$" },
+        "input_mode": { "type": "string", "enum": ["keyboard_mouse", "gamepad", "touch", "xr", "other"] }
       }
     },
     "events": {

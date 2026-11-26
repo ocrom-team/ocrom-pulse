@@ -6,6 +6,8 @@ const MAX_DECOMPRESSED_BYTES = 512 * 1024;
 const TIMESTAMP_SKEW_SEC = 900; // 15 minutes
 
 const ALLOWED_ENGINES = new Set(['godot', 'unity', 'unreal', 'custom', 'web']);
+const ALLOWED_ENVIRONMENTS = new Set(['dev', 'staging', 'prod']);
+const ALLOWED_INPUT_MODES = new Set(['keyboard_mouse', 'gamepad', 'touch', 'xr', 'other']);
 const ALLOWED_EVENT_TYPES = new Set([
   'session_start',
   'session_heartbeat',
@@ -117,6 +119,12 @@ export function validateBatch(payload) {
   }
   if (!payload.engine || typeof payload.engine !== 'object' || !ALLOWED_ENGINES.has(payload.engine.name)) {
     throw new HttpError(400, 'Invalid engine metadata.');
+  }
+  if (payload.engine.environment !== undefined && !ALLOWED_ENVIRONMENTS.has(payload.engine.environment)) {
+    throw new HttpError(400, 'Invalid engine.environment.');
+  }
+  if (payload.hardware && payload.hardware.input_mode !== undefined && !ALLOWED_INPUT_MODES.has(payload.hardware.input_mode)) {
+    throw new HttpError(400, 'Invalid hardware.input_mode.');
   }
   if (!Array.isArray(payload.events) || payload.events.length === 0 || payload.events.length > 100) {
     throw new HttpError(400, 'events must be an array of 1 to 100 items.');

@@ -6,7 +6,7 @@ Use these exact settings when submitting **Neocrom Pulse** to the [Godot Asset L
 - **Category**: `Tools` (or `Misc`)
 - **Godot Version**: `4.3` (compatible with 4.3 – 4.7+)
 - **License**: `MIT`
-- **Version String**: `0.2.0`
+- **Version String**: `0.3.0`
 - **Repository Host**: GitHub (or GitLab / Codeberg)
 - **Download Commit / Tag**: Use the latest 40-char commit hash on `main` (the `.gitattributes` `export-ignore` rules ensure the downloaded ZIP only installs `addons/neocrom_pulse/`, `LICENSE`, and `README.md` into users' projects!)
 - **Icon URL**: `https://raw.githubusercontent.com/neocrom-team/neocrom-pulse/main/addons/neocrom_pulse/icon.png`

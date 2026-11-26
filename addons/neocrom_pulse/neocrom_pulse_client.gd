@@ -11,7 +11,7 @@ signal batch_flushed(event_count: int, success: bool)
 signal error_reported(fingerprint: String)
 
 const SDK_NAME := "neocrom-pulse-godot"
-const SDK_VERSION := "0.2.0"
+const SDK_VERSION := "0.3.0"
 const ERROR_COOLDOWN_SEC := 10.0
 
 var config: ConfigScript
@@ -26,6 +26,7 @@ var _session_started_ms: int = 0
 var _active_play_ms: int = 0
 var _last_resume_ms: int = 0
 var _is_paused: bool = false
+var _last_scene_path: String = ""
 
 var _event_queue: Array[Dictionary] = []
 var _pending_batch: Array[Dictionary] = []
@@ -91,6 +92,9 @@ func _process(delta: float) -> void:
 		_flush_elapsed = 0.0
 		flush()
 
+	if config.auto_track_scenes and bool(_consent.get("gameplay", false)):
+		_check_auto_scene_change()
+
 
 func _notification(what: int) -> void:
 	match what:
@@ -98,6 +102,11 @@ func _notification(what: int) -> void:
 			if _session_active and not _is_paused:
 				_is_paused = true
 				_active_play_ms += maxi(0, Time.get_ticks_msec() - _last_resume_ms)
+			if what == NOTIFICATION_APPLICATION_PAUSED and (OS.has_feature("android") or OS.has_feature("ios")):
+				if not _event_queue.is_empty() and _transport != null:
+					if not flush():
+						_transport.persist_offline_events(_event_queue)
+						_event_queue.clear()
 		NOTIFICATION_APPLICATION_RESUMED, NOTIFICATION_APPLICATION_FOCUS_IN:
 			if _session_active and _is_paused:
 				_is_paused = false
@@ -180,14 +189,16 @@ func reset_consent() -> void:
 	consent_changed.emit(_consent.duplicate())
 
 
-func show_consent_dialog(parent: Node = null) -> Node:
+func show_consent_dialog(parent: Node = null, locale: String = "auto", theme_preset: String = "neocrom_dark", custom_texts: Dictionary = {}) -> Node:
+	if DisplayServer.get_name() == "headless" or OS.has_feature("dedicated_server"):
+		return null
 	if _consent_dialog != null and is_instance_valid(_consent_dialog):
 		_consent_dialog.queue_free()
 	var dialog_script := load("res://addons/neocrom_pulse/ui/neocrom_pulse_consent_dialog.gd")
 	var dialog: Node = dialog_script.new()
 	var target := parent if parent != null else get_tree().root
 	target.add_child(dialog)
-	dialog.setup(self)
+	dialog.setup(self, locale, theme_preset, custom_texts)
 	_consent_dialog = dialog
 	return dialog
 
@@ -221,8 +232,12 @@ func end_session() -> void:
 		})
 	_session_active = false
 	if not _event_queue.is_empty() and _transport != null:
+		if OS.has_feature("web"):
+			var batch := _event_queue.slice(0, mini(config.max_batch_size, _event_queue.size()))
+			if _transport.send_beacon_web(build_envelope(batch)):
+				_event_queue = _event_queue.slice(batch.size())
 		# Best-effort synchronous flush attempt or persist offline for next startup
-		if not flush():
+		if not _event_queue.is_empty() and not flush():
 			_transport.persist_offline_events(_event_queue)
 			_event_queue.clear()
 
@@ -433,6 +448,7 @@ func build_envelope(events: Array) -> Dictionary:
 			"name": "godot",
 			"version": Engine.get_version_info().get("string", "4.x"),
 			"app_version": config.app_version,
+			"environment": config.environment,
 		},
 		"consent": {
 			"gameplay": bool(_consent.get("gameplay", false)),
@@ -499,6 +515,20 @@ func _is_any_consent_granted() -> bool:
 	return bool(_consent.get("gameplay", false)) \
 		or bool(_consent.get("performance", false)) \
 		or bool(_consent.get("errors", false))
+
+
+func _check_auto_scene_change() -> void:
+	if not is_inside_tree() or get_tree() == null:
+		return
+	var scene := get_tree().current_scene
+	if scene == null:
+		return
+	var scene_path := scene.scene_file_path
+	if scene_path.is_empty():
+		scene_path = scene.name
+	if scene_path != _last_scene_path:
+		_last_scene_path = scene_path
+		track_event("scene_entered", {"scene": scene_path.get_file().get_basename()})
 
 
 static func _generate_session_id() -> String:

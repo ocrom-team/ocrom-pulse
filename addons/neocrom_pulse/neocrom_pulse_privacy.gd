@@ -153,10 +153,13 @@ static func collect_anonymized_hardware() -> Dictionary:
 	elif ram_gb >= 6.0:
 		ram_bucket = "8"
 
+	var is_headless := DisplayServer.get_name() == "headless" or OS.has_feature("dedicated_server")
 	var adapter_vendor := RenderingServer.get_video_adapter_vendor().to_lower()
 	var adapter_name := RenderingServer.get_video_adapter_name()
 	var gpu_vendor := "Other"
-	if adapter_vendor.contains("nvidia") or adapter_name.to_lower().contains("nvidia") or adapter_name.to_lower().contains("geforce") or adapter_name.to_lower().contains("rtx"):
+	if is_headless:
+		gpu_vendor = "Software"
+	elif adapter_vendor.contains("nvidia") or adapter_name.to_lower().contains("nvidia") or adapter_name.to_lower().contains("geforce") or adapter_name.to_lower().contains("rtx"):
 		gpu_vendor = "NVIDIA"
 	elif adapter_vendor.contains("amd") or adapter_vendor.contains("ati") or adapter_name.to_lower().contains("radeon"):
 		gpu_vendor = "AMD"
@@ -171,9 +174,9 @@ static func collect_anonymized_hardware() -> Dictionary:
 	elif adapter_name.to_lower().contains("llvmpipe") or adapter_name.to_lower().contains("swiftshader") or adapter_name.is_empty():
 		gpu_vendor = "Software"
 
-	var gpu_tier := _coarsen_gpu_name(adapter_name, gpu_vendor)
+	var gpu_tier := "Headless / Dedicated Server" if is_headless else _coarsen_gpu_name(adapter_name, gpu_vendor)
 
-	var screen_size := DisplayServer.screen_get_size() if DisplayServer.get_name() != "headless" else Vector2i(1920, 1080)
+	var screen_size := DisplayServer.screen_get_size() if not is_headless else Vector2i(1920, 1080)
 	var min_dim := mini(screen_size.x, screen_size.y)
 	var display_bucket := "<720p"
 	if min_dim >= 2000:
@@ -188,6 +191,16 @@ static func collect_anonymized_hardware() -> Dictionary:
 	var raw_locale := OS.get_locale_language().to_lower()
 	var lang := raw_locale.substr(0, 2) if raw_locale.length() >= 2 else "en"
 
+	var input_mode := "keyboard_mouse"
+	if is_headless:
+		input_mode = "other"
+	elif OS.has_feature("xr"):
+		input_mode = "xr"
+	elif OS.has_feature("android") or OS.has_feature("ios") or DisplayServer.is_touchscreen_available():
+		input_mode = "touch"
+	elif Input.get_connected_joypads().size() > 0 and (OS.has_feature("steamdeck") or OS.has_feature("console")):
+		input_mode = "gamepad"
+
 	return {
 		"os_family": os_family,
 		"arch": arch,
@@ -197,6 +210,7 @@ static func collect_anonymized_hardware() -> Dictionary:
 		"gpu_tier": gpu_tier,
 		"display_bucket": display_bucket,
 		"locale_lang": lang,
+		"input_mode": input_mode,
 	}
 
 

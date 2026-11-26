@@ -3,6 +3,7 @@ extends SceneTree
 const ClientScript = preload("res://addons/neocrom_pulse/neocrom_pulse_client.gd")
 const PrivacyScript = preload("res://addons/neocrom_pulse/neocrom_pulse_privacy.gd")
 const TransportScript = preload("res://addons/neocrom_pulse/neocrom_pulse_transport.gd")
+const I18nScript = preload("res://addons/neocrom_pulse/ui/neocrom_pulse_i18n.gd")
 
 var _failures: int = 0
 var _assertions: int = 0
@@ -126,6 +127,16 @@ func _initialize() -> void:
 	client.flush()
 	var persisted := client._transport.pop_offline_events(10)
 	_assert(persisted.size() >= 1, "Failed batch persisted to offline disk queue and recovered")
+
+	# 6. i18n, v1.1 envelope fields & headless safety
+	var de_texts := I18nScript.get_texts("de", {"btn_accept": "Los geht's"})
+	_assert(de_texts.get("title", "") == "NEOCROM PULSE TELEMETRIE", "i18n resolves German translation")
+	_assert(de_texts.get("btn_accept", "") == "Los geht's", "i18n applies custom text override")
+	_assert(I18nScript.resolve_locale("xx") == "en", "i18n falls back to English for unknown locale")
+
+	var v11_env := client.build_envelope([])
+	_assert(v11_env.get("engine", {}).get("environment", "") == "dev", "Envelope includes engine.environment")
+	_assert(v11_env.get("hardware", {}).has("input_mode"), "Hardware profile includes input_mode")
 
 	# Cleanup test artifacts
 	client.reset_consent()

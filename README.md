@@ -14,7 +14,7 @@
 | Platform | Status / Entry Point |
 | :--- | :--- |
 | **Neocrom HQ** | [neocrom.pro](https://neocrom.pro) |
-| **GitHub Repository & Releases** | [neocrom-team/neocrom-pulse](https://github.com/neocrom-team/neocrom-pulse) · [Release v0.2.0](https://github.com/neocrom-team/neocrom-pulse/releases/tag/v0.2.0) |
+| **GitHub Repository & Releases** | [neocrom-team/neocrom-pulse](https://github.com/neocrom-team/neocrom-pulse) · [Release v0.3.0](https://github.com/neocrom-team/neocrom-pulse/releases/tag/v0.3.0) |
 | **Godot Asset Library** | [Asset #25115](https://godotengine.org/asset-library/asset/edit/25115) *(Pending Moderator Approval)* |
 | **Unity Package Manager (Git)** | `https://github.com/neocrom-team/neocrom-pulse.git?path=/sdk/unity` |
 | **OpenUPM (`pro.neocrom.pulse`)** | [openupm.com/packages/pro.neocrom.pulse](https://openupm.com/packages/pro.neocrom.pulse/) *(Merged via [#7280](https://github.com/openupm/openupm/pull/7280))* |

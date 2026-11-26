@@ -182,3 +182,49 @@ test('server enforces consent flags by dropping non-consented event categories',
     await new Promise(resolve => server.close(resolve));
   }
 });
+
+test('server accepts v1.1 optional fields (engine.environment, hardware.input_mode) and rejects invalid values', async () => {
+  const { server, db, baseUrl } = await startTestServer();
+  try {
+    const createRes = await fetch(`${baseUrl}/api/v1/projects`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: 'v11-test', name: 'v1.1 Test' }),
+    });
+    const { project } = await createRes.json();
+    const nowSec = Math.floor(Date.now() / 1000);
+
+    const okRes = await fetch(`${baseUrl}/api/v1/ingest`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Neocrom-Key': project.ingest_key },
+      body: JSON.stringify({
+        schema_version: 1,
+        project_id: project.id,
+        session_id: 'aaaa2222333344445555666677778888',
+        sent_at: nowSec,
+        engine: { name: 'godot', version: '4.7.2', environment: 'prod' },
+        hardware: { os_family: 'Windows', input_mode: 'gamepad' },
+        consent: { gameplay: true, performance: false, errors: false, hardware: true, public_benchmark: false },
+        events: [{ type: 'session_start', ts: nowSec }],
+      }),
+    });
+    assert.equal(okRes.status, 202);
+
+    const badRes = await fetch(`${baseUrl}/api/v1/ingest`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Neocrom-Key': project.ingest_key },
+      body: JSON.stringify({
+        schema_version: 1,
+        project_id: project.id,
+        session_id: 'bbbb2222333344445555666677778888',
+        sent_at: nowSec,
+        engine: { name: 'godot', version: '4.7.2', environment: 'invalid_env' },
+        events: [{ type: 'session_start', ts: nowSec }],
+      }),
+    });
+    assert.equal(badRes.status, 400);
+  } finally {
+    db.close();
+    await new Promise(resolve => server.close(resolve));
+  }
+});
